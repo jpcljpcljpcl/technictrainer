@@ -4,9 +4,9 @@
 
 Proposta de Projeto
 
-**Orientador:** Professor Doutor Carlos Augusto da Silva Cunha [(cunha@di.ubi.pt)](mailto:cunha@di.ubi.pt)
+**Orientador:** Professor Doutor Carlos Augusto da Silva Cunha [(cunha@@@@@@di.ubi.pt)]
 
-**Aluno:** João Paulo Cláudio Lopes [(joao.paulo.lopes@ubi.pt)](mailto:joao.paulo.lopes@ubi.pt)
+**Aluno:** João Paulo Cláudio Lopes [(joao.paulo.lopes@@@@@@ubi.pt)]
 
 **Área:** Desenvolvimento web
 
