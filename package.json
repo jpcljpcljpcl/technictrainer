@@ -36,5 +36,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "![](RackMultipart20220401-4-10yme2x_html_d071c00608022e3d.png)",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpcljpcljpcl/technictrainer.git"
+  },
+  "author": "JoaoLopes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpcljpcljpcl/technictrainer/issues"
+  },
+  "homepage": "https://github.com/jpcljpcljpcl/technictrainer#readme"
 }
