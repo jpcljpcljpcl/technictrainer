@@ -23,7 +23,7 @@ export default function MeusClubes() {
         </Row>
         <Row>
             <CardGroup>
-            <Card style={{ width: '18rem' }}>
+            <Card bg="dark" style={{ width: '18rem' }}>
                 <Card.Body>
                     <Card.Title>Exemplo Clube</Card.Title>
                     <Card.Text>

@@ -5,12 +5,11 @@ import Home from './components/PageComponents/Home'
 import Calendario from './components/PageComponents/Calendario'
 import MeusClubes from './components/PageComponents/MeusClubes'
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import Login from './components/Login'
 
 export default function App() {
   return (
-    
-    <div>
-
+    <div class="p-3 bg-dark text-white">
       <BrowserRouter>
 <div>
     <Routes>
@@ -20,7 +19,10 @@ export default function App() {
     </Routes>
   </div>
 </BrowserRouter>
+
+
+{/*   */}
 </div>
 );
 }
- {/*   */}
+ 
