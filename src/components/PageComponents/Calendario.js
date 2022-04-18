@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import { DayPicker } from 'react-day-picker';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
+import 'react-day-picker/dist/style.css';
 
 export default function Calendario() {
   return (

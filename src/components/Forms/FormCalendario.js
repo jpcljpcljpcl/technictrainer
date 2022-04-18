@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form , Container, Button, Row, Col} from 'react-bootstrap';
+import { Form , Container, Button, Row} from 'react-bootstrap';
 
 export default function App() {
   return (

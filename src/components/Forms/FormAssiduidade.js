@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form , Container, Button, Row, Col} from 'react-bootstrap';
+import { Form , Container, Button, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function App() {
