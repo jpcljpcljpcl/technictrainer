@@ -1,12 +1,18 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Button } from 'react-bootstrap';
-import { DayPicker } from 'react-day-picker';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
 import 'react-day-picker/dist/style.css';
+import CriarEvento from './CriarEvento';
+import {useState} from 'react';
+import { DayPicker } from 'react-day-picker';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 export default function Calendario() {
+    const today = new Date();
+    const [selectedDay, setSelectedDay] = useState(today);
+
   return (
     <Container>
         <Row>
@@ -16,7 +22,7 @@ export default function Calendario() {
             <Timebar/>
         </Row>
         <Row>
-        <h1>Dia %%%%%%% (dia selecionado) (primeira vez abre com o dia atual)</h1>
+        <h5>{format(selectedDay, 'PPP', {locale: pt})}</h5>
 </Row>
 
 <Row>
@@ -31,10 +37,19 @@ export default function Calendario() {
     </Col>
     <Col>
         <Row>
-            <DayPicker mode="single"/>
+        <DayPicker 
+/*             fromYear={2020} 
+            toYear={2030} 
+            captionLayout="dropdown"  */
+            mode="single"
+            required
+            selected={selectedDay}
+            onSelect={setSelectedDay}
+            locale={pt}
+            />
         </Row>
         <Row>
-            <Button>Criar Evento</Button>
+            <CriarEvento/>
         </Row>
     </Col>
 </Row>
