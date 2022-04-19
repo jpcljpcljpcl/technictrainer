@@ -28,12 +28,12 @@ export default function Calendario() {
 <Row>
     <Col>
         <h1>Agenda Diaria</h1>
-        <div>Agenda com horario de tarefas</div>
-        <div>Agenda com horario de tarefas</div>
-        <div>Agenda com horario de tarefas</div>
-        <div>Agenda com horario de tarefas</div>
-        <div>Agenda com horario de tarefas</div>
-        <div>Agenda com horario de tarefas</div>
+        <div>Agenda com lista de tarefas do dia</div>
+        <div>Agenda com lista de tarefas do dia</div>
+        <div>Agenda com lista de tarefas do dia</div>
+        <div>Agenda com lista de tarefas do dia</div>
+        <div>Agenda com lista de tarefas do dia</div>
+        <div>Agenda com lista de tarefas do dia</div>
     </Col>
     <Col>
         <Row>

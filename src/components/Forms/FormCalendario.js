@@ -1,15 +1,14 @@
 import React from 'react';
-import { Form , Container, Button, Row} from 'react-bootstrap';
+import { Form , Container, Row, Badge} from 'react-bootstrap';
 
 export default function App() {
   return (
     
 <Container>
     <Row>
+      <Badge pill bg="secondary">Clube (selecionado)</Badge>
       <h1>Dia %%%%% (selecionado)</h1>
-    </Row>
-    <Row>
-      <h1>Criar</h1>
+
     </Row>
     <Row>
       <Form>
@@ -20,8 +19,6 @@ export default function App() {
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
       <Form.Control as="textarea" rows={3} />
       </Form.Group>
-
-        <Button type="submit">Submit</Button>
       </Form>
     </Row>
 </Container>

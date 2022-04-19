@@ -7,12 +7,10 @@ export default function App() {
     
 <Container>
     <Row>
-      <h1>Assiduidade</h1>
-    </Row>
-    <Row>
       <Form>
         <Form.Check type='checkbox' id='checkbox' label='Joao'/>
-        <Button type="submit">Submit</Button>
+        <Form.Check type='checkbox' id='checkbox' label='Ricardo'/>
+        <Form.Check type='checkbox' id='checkbox' label='Pedro'/>
       </Form>
     </Row>
 </Container>

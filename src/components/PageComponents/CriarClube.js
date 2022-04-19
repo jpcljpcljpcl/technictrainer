@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import FormCalendario from '../../components/Forms/FormCalendario'
+import FormClube from '../../components/Forms/FormClube'
 
-export default function CriarEvento(){
+export default function CriarClube() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -12,7 +12,7 @@ export default function CriarEvento(){
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
-          Criar Evento
+          Criar/Entrar em Clube
         </Button>
   
         <Modal
@@ -22,10 +22,10 @@ export default function CriarEvento(){
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Criar Treino/Evento</Modal.Title>
+            <Modal.Title>Criar/Entrar em Clube</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormCalendario/>
+            <FormClube/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

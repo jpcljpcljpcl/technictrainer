@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import FormAssiduidade from '../../components/Forms/FormAssiduidade'
 
 export default function Assiduidade() {
     const [show, setShow] = useState(false);
@@ -24,8 +25,7 @@ export default function Assiduidade() {
             <Modal.Title>Assiduidade</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            I will not close if you click outside me. Don't even try to press
-            escape key.
+            <FormAssiduidade/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
