@@ -6,7 +6,7 @@ export default function App() {
     
 <Container>
     <Row>
-      <Badge pill bg="secondary">Clube (selecionado)</Badge>
+      <Badge pill bg="secondary">Clube FC (clube selecionado)</Badge>
       <h1>Dia %%%%% (selecionado)</h1>
 
     </Row>

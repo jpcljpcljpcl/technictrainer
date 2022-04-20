@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import FormCalendario from '../../components/Forms/FormCalendario'
+import { Row, Col } from 'react-bootstrap';
 
 export default function CriarEvento(){
     const [show, setShow] = useState(false);
@@ -11,10 +12,13 @@ export default function CriarEvento(){
   
     return (
       <>
+      <Row>
+        <Col md>
         <Button variant="primary" onClick={handleShow}>
           Criar Evento
         </Button>
-  
+        </Col>
+      </Row>
         <Modal
           show={show}
           onHide={handleClose}
