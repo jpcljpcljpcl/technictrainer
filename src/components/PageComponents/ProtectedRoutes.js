@@ -1,11 +1,17 @@
 import { Outlet } from "react-router"
 import FormLogin from "../../FormLogin"
+import FormName from "../../FormName"
 import { useAuth } from "../../firebase"
 
 
 export default function ProtectedRoutes() {
     const currentUser = useAuth();
-    return currentUser ? <Outlet/> : <FormLogin/>;
+    if (currentUser == null){
+        return <FormLogin />;
+    }
+    if ((currentUser != null) && (currentUser.displayName == null)){
+        return <FormName/>;
+    } else {return  <Outlet/>;}
 }
 
 

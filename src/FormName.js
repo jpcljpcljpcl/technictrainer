@@ -1,8 +1,9 @@
 import { React, useRef, useState } from 'react'
 import { signup, useAuth, logout, signin, setUidProfile } from './firebase';
 import {Form,Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-export default function FormLogin() {
+export default function FormName() {
 const [loading,setLoading]=useState(false);
 const currentUser=useAuth();
 
@@ -44,10 +45,20 @@ async function handleLogout(){
   setLoading(false);
 }
 
+function setUidName(){
+  setLoading(true);
+  try{
+    setUidProfile(uidnameRef.current.value);
+  } catch (error) {
+    alert("Error!");
+  }
+  setLoading(false);
+}
+
 
   return (
     <div>
-        <Form>
+       {/*  <Form>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
@@ -66,6 +77,21 @@ async function handleLogout(){
   <Button onClick={handleLogout} variant="primary" disabled={loading || !currentUser}>
     Log Out
   </Button>
+</Form>
+<div>Email logado : {currentUser?.email}</div>
+
+<br /> */}
+
+<h1>Insira Nome Completo</h1>
+
+<Form>
+<Form.Control ref={uidnameRef} placeholder={currentUser?.displayName}
+  />
+  <br />
+    <Button onClick={setUidName} disabled={loading || !currentUser}>
+    Alterar Nome
+  </Button>
+  <Link to="/">Home</Link>
 </Form>
 
 

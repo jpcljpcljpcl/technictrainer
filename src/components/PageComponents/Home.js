@@ -6,11 +6,11 @@ import { useAuth } from '../../firebase';
 import Assiduidade from './Assiduidade';
 
 export default function Home() {
+  
   const currentUser=useAuth();
 
   return (
     <Container>
-      <div>Email logado : {currentUser?.email}</div>
               <Row>
             <Navbar/>
         </Row>
@@ -18,21 +18,25 @@ export default function Home() {
             <Timebar/>
         </Row>
         <Row>
+          <h1>Bem vindo/a {currentUser?.displayName}</h1>
+        </Row>
+        <Row>
         <Assiduidade />
         </Row>
         <Row>
-        <div>
-            Treino ....
-            Treino ....
-            Treino ....
-            Treino ....
-            Treino ....
-            Treino ....
-            Treino ....
-            Treino ....
-            
-            
-        </div>
+          <h3>Treino dia %%</h3>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+        <div>Treino ....</div>
+
+        
       </Row>
     </Container>
 

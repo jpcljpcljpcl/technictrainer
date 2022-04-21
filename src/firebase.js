@@ -2,8 +2,9 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { useState, useEffect } from "react";
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -43,3 +44,13 @@ export function useAuth(){
   return currentUser;
 }
 
+export function setUidProfile(nome){
+  updateProfile(auth.currentUser, {displayName: nome}).then(() => {
+    window.location.reload();
+  })
+}
+
+
+
+//Database
+const db = getFirestore(app);
