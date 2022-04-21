@@ -19,7 +19,7 @@ async function handleSignup (){
   try{
     await signup(emailRef.current.value, passwordRef.current.value);
   } catch {
-    alert("Error!");
+    alert("Email ja resgistado");
   }
   setLoading(false);
 }
@@ -29,7 +29,7 @@ async function handleSignin (){
   try{
     await signin(emailRef.current.value, passwordRef.current.value);
   } catch {
-    alert("Error!");
+    alert("Conta inexistente");
   }
   setLoading(false);
 }
@@ -39,7 +39,7 @@ async function handleLogout(){
     try {
      await logout();
     } catch (error) {
-      alert("Error!");
+      alert("Erro no Logout!");
     }
   setLoading(false);
 }

@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { useState, useEffect } from "react";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,18 +20,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export function signup(email, password){
-    return createUserWithEmailAndPassword(auth, email, password);
-}
-
-export function signin(email, password){
-    return signInWithEmailAndPassword(auth, email, password);
-}
-
-
-export function logout(){
-  return signOut(auth);
-}
 
 export function useAuth(){
   const [currentUser, setCurrentUser] = useState();
@@ -44,6 +32,20 @@ export function useAuth(){
   return currentUser;
 }
 
+export function signup(email, password){
+    return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function signin(email, password){
+    return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function logout(){
+  return signOut(auth);
+}
+
+
+
 export function setUidProfile(nome){
   updateProfile(auth.currentUser, {displayName: nome}).then(() => {
     window.location.reload();
@@ -53,4 +55,71 @@ export function setUidProfile(nome){
 
 
 //Database
+//Database
+//Database
+//Database
+//Database
+
+
 const db = getFirestore(app);
+
+
+
+export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinador){
+  try{
+    await setDoc(doc(db, "ClubeTest/"+nomeClube), {
+      chaveClube,
+      descricaoClube,
+      uidTreinador,
+    });
+    }catch{
+      alert("Erro na criacao de clube");
+    }
+}
+
+ criarClube("CNTN","pwclube","random descricao","12321312uidtreinador");
+
+export async function juntarClube(nomeClube,uidAtual,nome){
+  try{
+    await setDoc(doc(db, "ClubeTest/"+nomeClube+"/atletas/", uidAtual), {
+      nome
+    });
+    }catch{
+      alert("Erro na criacao de clube");
+    }
+}
+
+juntarClube("CNTN","currentUser.uid","currentUser.displayName");
+
+
+export async function criarTreino(nomeClube,nome,data,descricao){
+  try{
+    await addDoc(collection(db, "ClubeTest/"+nomeClube+"/treinos/"), {
+      nome,
+      data,
+      descricao
+    });
+    }catch{
+      alert("Erro na criacao de clube");
+    }
+}
+
+criarTreino("CNTN","Treino xpto teste","25/04/2022","20x 100 1'45 vo2 max");
+
+/* async function testeDB(){
+  try{
+    await setDoc(doc(db, "cities/new-city-id"), {
+      first: "Ada",
+      last: "Lovelace",
+      born: 1815
+  });
+  }catch{
+    alert("Erro na criacao de clube");
+  }
+} 
+
+
+testeDB();
+*/
+
+

@@ -15,18 +15,16 @@ export default function App() {
   const currentUser=useAuth();
 
   return (
-    <div class="p-3 bg-dark text-white">
+    <div className="p-3 bg-dark text-white">
             <div>UID: {currentUser?.uid}</div>
             <div>Email: {currentUser?.email}</div>
             <div>Nome: {currentUser?.displayName}</div>
             <div><Button href="/setname">changename</Button></div>
+{/*
 <br />
 <br />
 <br />
-
-      {/* <FormLogin/> */}
-<br/>
-<br/>
+       <FormLogin/> */}
 <br/>
 <br/>
     <BrowserRouter>
