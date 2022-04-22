@@ -1,5 +1,5 @@
 import { React, useRef, useState } from 'react'
-import { signup, useAuth, logout, signin, setUidProfile } from './firebase';
+import { signup, useAuth, logout, signin } from './firebase';
 import {Form,Button} from 'react-bootstrap';
 
 export default function FormLogin() {
@@ -8,11 +8,7 @@ const currentUser=useAuth();
 
 const emailRef = useRef();
 const passwordRef = useRef();
-const uidnameRef = useRef();
 
-function refreshPage() {
-  window.location.reload(false);
-}
 
 async function handleSignup (){
   setLoading(true);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form , Container, Button, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { criarClube } from '../../firebase';
 import Nav from 'react-bootstrap/Nav'
 
 

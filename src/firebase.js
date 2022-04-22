@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { useState, useEffect } from "react";
-import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { getFirestore,arrayUnion, collection, Timestamp ,addDoc, doc, setDoc,updateDoc, getDoc, getDocs, collectionGroup, query, where, } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -63,48 +63,190 @@ export function setUidProfile(nome){
 
 const db = getFirestore(app);
 
-
-
-export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinador){
+//////////////////////////
+//criar clube
+export async function criarClube(nomeClube,descricaoClube,uidTreinador){
   try{
     await setDoc(doc(db, "ClubeTest/"+nomeClube), {
-      chaveClube,
+      chaveClube:"",
       descricaoClube,
       uidTreinador,
+      uidAtletas: [],
     });
     }catch{
       alert("Erro na criacao de clube");
     }
 }
+/*  criarClube("CNTN","pwclube","random descricao","12321312uidtreinador"); */
+////////////////////////////////
 
- criarClube("CNTN","pwclube","random descricao","12321312uidtreinador");
 
+
+
+////////////////////////////
+//juntarClube
 export async function juntarClube(nomeClube,uidAtual,nome){
   try{
     await setDoc(doc(db, "ClubeTest/"+nomeClube+"/atletas/", uidAtual), {
-      nome
-    });
-    }catch{
-      alert("Erro na criacao de clube");
-    }
-}
-
-juntarClube("CNTN","currentUser.uid","currentUser.displayName");
-
-
-export async function criarTreino(nomeClube,nome,data,descricao){
-  try{
-    await addDoc(collection(db, "ClubeTest/"+nomeClube+"/treinos/"), {
       nome,
-      data,
-      descricao
     });
+    await updateDoc(doc(db, "ClubeTest/",nomeClube),{
+      uidAtletas: arrayUnion(uidAtual),
+    }, { merge: true });
     }catch{
       alert("Erro na criacao de clube");
     }
 }
+/* juntarClube("CNTN","currentUser.Teste","currentUser.displayName"); */
+////////////////////////////////
 
-criarTreino("CNTN","Treino xpto teste","25/04/2022","20x 100 1'45 vo2 max");
+
+
+
+
+
+
+
+////////////////////////////////
+//ListarClubes
+export async function listarClubes(){
+ const querySnapshot = await getDocs(collection(db, "ClubeTest"));
+  try {
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
+  } catch {
+    alert("Erro");
+  }
+}
+/* listarClubes(); */
+////////////////////////////////
+
+
+
+////////////////////////////////
+//ListarClubesPertencentes
+export async function listarClubesPertencentes(uidAtual){
+  const atletasRef = collection(db, "ClubeTest");
+  const q = query(atletasRef, where("uidAtletas","array-contains",uidAtual), )
+  const q2 = query(atletasRef, where("uidTreinador", "==" ,uidAtual), )
+
+  try {
+   const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  })
+
+  const querySnapshot2 = await getDocs(q2);
+  querySnapshot2.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+
+  } catch  {
+    alert("Erro")
+  }
+ }
+/*  listarClubesPertencentes("123uidtreinador") */
+/////////////////////////////////
+
+
+
+
+////////////////////////////////
+//CriarEntrada na agenda
+export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvento){
+  try{
+    await addDoc(collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento), {
+      nome,
+      data: Timestamp.fromDate(new Date(data)),
+      descricao,
+      assiduidade: []
+    });
+    }catch{
+      alert("Erro");
+    }
+}
+/* criarEntrada("CNTN","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos"); */
+////////////////////////////////
+
+
+////////////////////////////////
+//Gerir Assiduidade
+export async function gerirAssiduidade(nomeClube,tipoTreinoEvento,uidTreinoEvento,arrayPresencas){
+  try{
+      await updateDoc(doc(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento,uidTreinoEvento),{
+        assiduidade: arrayUnion.apply(this, arrayPresencas),
+    });
+    }catch{
+      alert("Erro");
+    }
+}
+/* gerirAssiduidade("CNTN","treinos","6WEr3F4x0jxUlh0CyPOV",["currentUser.Teste", "currentUser.uid"]); */
+////////////////////////////////
+
+
+
+////////////////////////////////
+//ListarAgenda
+export async function listarAgenda(nomeClube,tipoTreinoEvento){
+  const querySnapshot = await getDocs(collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento));
+   try {
+ querySnapshot.forEach((doc) => {
+   // doc.data() is never undefined for query doc snapshots
+   console.log(doc.id, " => ", doc.data());
+ });
+   } catch {
+     alert("Erro");
+   }
+ }
+/*  listarAgenda("CNTN","treinos"); */
+ ////////////////////////////////
+
+
+ ////////////////////////////////
+//listarAgendaEqualTo
+export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
+  const atletasRef = collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento);
+  const q = query(atletasRef, where("data","==",new Date(data)), )
+
+
+  try {
+   const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+  } catch  {
+    alert("Erro")
+  }
+ }
+/*  listarAgendaEqualTo("CNTN","treinos","12/25/1815") */
+/////////////////////////////////
+
+
+
+ ////////////////////////////////
+//teste
+export async function testeDoc(uidAtual){
+ const atletasRef = collection(db, "ClubeTest");
+ const q = query(atletasRef, where("uidAtletas","array-contains",uidAtual), )
+ 
+ try {
+  const querySnapshot = await getDocs(q);
+ querySnapshot.forEach((doc) => {
+   // doc.data() is never undefined for query doc snapshots
+   console.log(doc.id, " => ", doc.data());
+ });
+ } catch  {
+   alert("Erro")
+ }
+ 
+}
+/*  testeDoc("currentUser.uid"); */
+
 
 /* async function testeDB(){
   try{

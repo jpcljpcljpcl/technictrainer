@@ -1,5 +1,5 @@
 import { React, useRef, useState } from 'react'
-import { signup, useAuth, logout, signin, setUidProfile } from './firebase';
+import { useAuth, setUidProfile } from './firebase';
 import {Form,Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -7,43 +7,7 @@ export default function FormName() {
 const [loading,setLoading]=useState(false);
 const currentUser=useAuth();
 
-const emailRef = useRef();
-const passwordRef = useRef();
 const uidnameRef = useRef();
-
-function refreshPage() {
-  window.location.reload(false);
-}
-
-async function handleSignup (){
-  setLoading(true);
-  try{
-    await signup(emailRef.current.value, passwordRef.current.value);
-  } catch {
-    alert("Error!");
-  }
-  setLoading(false);
-}
-
-async function handleSignin (){
-  setLoading(true);
-  try{
-    await signin(emailRef.current.value, passwordRef.current.value);
-  } catch {
-    alert("Error!");
-  }
-  setLoading(false);
-}
-
-async function handleLogout(){
-  setLoading(true);
-    try {
-     await logout();
-    } catch (error) {
-      alert("Error!");
-    }
-  setLoading(false);
-}
 
 function setUidName(){
   setLoading(true);
