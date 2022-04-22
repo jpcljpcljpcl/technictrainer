@@ -3,11 +3,19 @@ import { Container, Row, Col, CardGroup, Card, Button} from 'react-bootstrap';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
 import CriarClube from './CriarClube';
+import { listarClubesPertencentes } from '../../firebase';
+import { useAuth } from '../../firebase';
 
 
 export default function MeusClubes() {
+  const currentUser=useAuth();
+
+
+
+
   return (
     <Container>
+        
         <Row>
             <Navbar/>
         </Row>

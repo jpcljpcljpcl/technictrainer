@@ -149,7 +149,7 @@ export async function listarClubesPertencentes(uidAtual){
     alert("Erro")
   }
  }
-/*  listarClubesPertencentes("123uidtreinador") */
+/*  listarClubesPertencentes("TaXMVDlbNKhh0TH7SuekZsNgdaB3") */
 /////////////////////////////////
 
 

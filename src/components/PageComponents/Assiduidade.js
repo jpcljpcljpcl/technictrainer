@@ -31,7 +31,7 @@ export default function Assiduidade() {
             <Button variant="secondary" onClick={handleClose}>
               Fechar
             </Button>
-            <Button onClick="">Guardar</Button>
+            <Button>Guardar</Button>
           </Modal.Footer>
         </Modal>
       </>

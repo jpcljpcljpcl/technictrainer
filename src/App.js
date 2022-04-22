@@ -8,7 +8,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import FormLogin from './FormLogin'
 import ProtectedRoutes from './components/PageComponents/ProtectedRoutes'
 import FormName from './FormName'
-import { useAuth } from './firebase';
+import { useAuth, listarClubes } from './firebase';
 import { Button } from 'react-bootstrap';
 
 export default function App() {
@@ -25,6 +25,7 @@ export default function App() {
 <br />
 <br />
        <FormLogin/> */}
+
 <br/>
 <br/>
     <BrowserRouter>
