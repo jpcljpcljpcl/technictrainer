@@ -61,7 +61,7 @@ export function setUidProfile(nome){
 //Database
 
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 //////////////////////////
 //criar clube
@@ -115,6 +115,7 @@ export async function listarClubes(){
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
   console.log(doc.id, " => ", doc.data());
+
 });
   } catch {
     alert("Erro");
@@ -223,7 +224,7 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
     alert("Erro")
   }
  }
-/*  listarAgendaEqualTo("CNTN","treinos","12/25/1815") */
+/*  listarAgendaEqualTo("CNTN","eventos","1815/12/25") */
 /////////////////////////////////
 
 
