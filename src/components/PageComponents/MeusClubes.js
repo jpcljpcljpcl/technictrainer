@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, CardGroup, Card, Button} from 'react-bootstrap';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
 import CriarClube from './CriarClube';
 import { listarClubesPertencentes } from '../../firebase';
 import { useAuth } from '../../firebase';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 
 export default function MeusClubes() {
   const currentUser=useAuth();
 
+  const [clubes,setClubes]=useState([]);
+  
+  useEffect(() => {
+    const getClubes = async () => {
+      const data = await getDocs(collection(db, "ClubeTest"));
+      setClubes(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
+    }
+
+
+    getClubes();
+  }, []);
 
 
 
@@ -53,7 +66,19 @@ export default function MeusClubes() {
 
             </CardGroup>
         </Row>
-        
+
+        <div>
+{clubes.map((clube) => {
+  return (
+    <div>
+      {" "}
+      <h1>{clube.id}</h1>
+      <p> {clube.descricaoClube} </p>
+
+    </div>
+
+)})}
+</div>
     </Container>
   )
 }

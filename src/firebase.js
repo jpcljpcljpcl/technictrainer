@@ -224,7 +224,7 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
     alert("Erro")
   }
  }
- listarAgendaEqualTo("TesteSigasiga","eventos","2022/04/12")
+/*  listarAgendaEqualTo("TesteSigasiga","eventos","2022/04/12") */
 /////////////////////////////////
 
 
