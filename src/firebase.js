@@ -170,7 +170,7 @@ export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvent
       alert("Erro");
     }
 }
-criarEntrada("TesteSigasiga","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos");
+/* criarEntrada("TesteSigasiga","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos"); */
 ////////////////////////////////
 
 
@@ -224,7 +224,7 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
     alert("Erro")
   }
  }
-/*  listarAgendaEqualTo("CNTN","eventos","1815/12/25") */
+ listarAgendaEqualTo("TesteSigasiga","eventos","2022/04/12")
 /////////////////////////////////
 
 

@@ -17,11 +17,16 @@ export default function App() {
   const [active, setActive] = useState();
 
   const handleCriarEntrada = () => {
+    const event = new Date(startDate);
+    event.setHours(0);
+    event.setMinutes(0);
+    event.setSeconds(0);
     if (active === 0){
-    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"treinos")
+      
+    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
     }
     if (active === 1)
-    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"eventos")
+    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
     if (active == null){
       alert("Selecione Tipologia")
     }
@@ -37,7 +42,6 @@ export default function App() {
       <h3>Selecione data</h3>
       <DatePicker selected={startDate} 
           onChange={(date) => setStartDate(date)} 
-          locale="pt-PT" 
           ref={dataCriarTreinoEvento}/>
     </Row>
     <Row>
