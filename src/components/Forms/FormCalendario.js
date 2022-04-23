@@ -17,10 +17,10 @@ export default function App() {
   const [active, setActive] = useState();
 
   const handleCriarEntrada = () => {
-    if (active == 0){
+    if (active === 0){
     criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"treinos")
     }
-    if (active == 1)
+    if (active === 1)
     criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"eventos")
     if (active == null){
       alert("Selecione Tipologia")

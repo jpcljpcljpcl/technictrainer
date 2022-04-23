@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { useState, useEffect } from "react";
-import { getFirestore,arrayUnion, collection, Timestamp ,addDoc, doc, setDoc,updateDoc, getDoc, getDocs, collectionGroup, query, where, } from "firebase/firestore";
+import { getFirestore,arrayUnion, collection ,addDoc, doc, setDoc,updateDoc, getDocs, query, where, } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

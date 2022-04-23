@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { Form , Container, Button, Row, Col} from 'react-bootstrap';
+import React, { useRef } from 'react';
+import { Form , Container, Button, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Nav from 'react-bootstrap/Nav'
 import { criarClube, juntarClube, useAuth } from '../../firebase';
 
 
