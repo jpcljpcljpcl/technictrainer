@@ -7,21 +7,26 @@ import { listarClubesPertencentes } from '../../firebase';
 import { useAuth } from '../../firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
-
+import { where, query } from 'firebase/firestore';
 
 export default function MeusClubes() {
   const currentUser=useAuth();
 
   const [clubes,setClubes]=useState([]);
   
+
+  const atletasRef = collection(db, "ClubeTest");
+  const q = query(atletasRef, where("uidAtletas","array-contains","TaXMVDlbNKhh0TH7SuekZsNgdaB3"), )
+
+
   useEffect(() => {
-    const getClubes = async () => {
-      const data = await getDocs(collection(db, "ClubeTest"));
+    const getClubesPertencentes = async () => {
+      const data = await getDocs(q);
       setClubes(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
     }
 
 
-    getClubes();
+    getClubesPertencentes();
   }, []);
 
 
@@ -45,40 +50,30 @@ export default function MeusClubes() {
         </Row>
         <Row>
             <CardGroup>
-            <Card bg="dark" style={{ width: '18rem' }}>
+            
+{clubes.map(club => {
+  return (
+<Card bg="light" style={{ width: '18rem', color: 'black'}}>
                 <Card.Body>
-                    <Card.Title>Exemplo Clube</Card.Title>
+                    <Card.Title>{club.id}</Card.Title>
                     <Card.Text>
-                    EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE EXEMPLO DESCRICAO CLUBE 
+                    {club.descricaoClube}                    
                     </Card.Text>
                     <Row>
                       <Col>
                         <Button>Carregar Clube</Button>
                       </Col>
-                      <Col>
-                        <Button>Criar Chave de Convite</Button>
-                      </Col>
                     </Row>
                 </Card.Body>
                 </Card>
 
-
-
+)})}
             </CardGroup>
         </Row>
 
-        <div>
-{clubes.map((clube) => {
-  return (
-    <div>
-      {" "}
-      <h1>{clube.id}</h1>
-      <p> {clube.descricaoClube} </p>
+        
 
-    </div>
 
-)})}
-</div>
     </Container>
   )
 }

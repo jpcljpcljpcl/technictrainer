@@ -15,6 +15,7 @@ export default function App() {
   const currentUser=useAuth();
 
   return (
+    <div className="App">
     <div className="p-3 bg-dark text-white">
             <div>UID: {currentUser?.uid}</div>
             <div>Email: {currentUser?.email}</div>
@@ -43,6 +44,7 @@ export default function App() {
     </BrowserRouter>
 
 {/*   */}
+</div>
 </div>
 );
 }

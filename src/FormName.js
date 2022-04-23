@@ -22,29 +22,6 @@ function setUidName(){
 
   return (
     <div>
-       {/*  <Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control ref={passwordRef} type="password" placeholder="Password" />
-  </Form.Group>
-  <Button onClick={handleSignin} variant="primary" disabled={loading || currentUser}>
-    Sign In
-  </Button>
-  <Button onClick={handleSignup} variant="primary" disabled={loading || currentUser}>
-    Sign Up
-  </Button>
-  <Button onClick={handleLogout} variant="primary" disabled={loading || !currentUser}>
-    Log Out
-  </Button>
-</Form>
-<div>Email logado : {currentUser?.email}</div>
-
-<br /> */}
 
 <h1>Insira Nome Completo</h1>
 
