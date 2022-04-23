@@ -14,13 +14,17 @@ export default function App() {
   const dataCriarTreinoEvento = useRef();
 
   const [startDate, setStartDate] = useState(new Date());
-
+  const [active, setActive] = useState();
 
   const handleCriarEntrada = () => {
-    if (criarTreino.Check){
+    if (active == 0){
     criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"treinos")
-    }else
+    }
+    if (active == 1)
     criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,startDate,descricaoTreinoEvento.current.value,"eventos")
+    if (active == null){
+      alert("Selecione Tipologia")
+    }
   };
 
 
@@ -30,7 +34,7 @@ export default function App() {
 <Container>
     <Row>
       <Badge pill bg="secondary">Clube FC (clube selecionado)</Badge>
-      <h1>Dia %%%%% (selecionado)</h1>
+      <h3>Selecione data</h3>
       <DatePicker selected={startDate} 
           onChange={(date) => setStartDate(date)} 
           locale="pt-PT" 
@@ -39,8 +43,8 @@ export default function App() {
     <Row>
       <Form>
       
-        <Form.Check inline label="Treino" name="entrada" type="radio" ref={criarTreino} />
-        <Form.Check inline label="Evento" name="entrada" type="radio" ref={criarEvento} />
+        <Form.Check inline label="Treino" name="entrada" type="radio" ref={criarTreino} onClick={() => setActive(0)}/>
+        <Form.Check inline label="Evento" name="entrada" type="radio" ref={criarEvento} onClick={() => setActive(1)}/>
         <Form.Control type="text" placeholder="Titulo Treino/Evento" ref={nomeTreinoEvento}/>
         <Form.Group className="mb-3">
         <Form.Control as="textarea" rows={4} ref={descricaoTreinoEvento}/>
