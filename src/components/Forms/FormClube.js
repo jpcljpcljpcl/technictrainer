@@ -1,52 +1,50 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Form , Container, Button, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Nav from 'react-bootstrap/Nav'
+import { criarClube, juntarClube, useAuth } from '../../firebase';
 
 
 export default function App() {
+  const currentUser= useAuth();
+  const nomeClube = useRef();
+  const descricaoClube = useRef();
+  const criarSenha = useRef();
+
+  const handleClubeCriar = () => {
+    criarClube(nomeClube.current.value,criarSenha.current.value,descricaoClube.current.value,currentUser.uid)
+    console.log(nomeClube.current.value, criarSenha.current.value, descricaoClube.current.value,currentUser.uid)
+  };
+
+  const handleClubeEntrar = () => {
+    juntarClube(nomeClube.current.value,currentUser.uid,currentUser.displayName)
+    console.log(nomeClube.current.value,currentUser.uid,currentUser.displayName)
+  };
 
 
   return (
-
 <Container>
     <Row>
-    <Nav variant="pills" defaultActiveKey="criar">
-  <Nav.Item>
-    <Nav.Link eventKey="criar" checked>Criar</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="entrar">Entrar</Nav.Link>
-  </Nav.Item>
-</Nav>
-
 
       <Form>
-      <Form.Check inline label="Criar" name="criarentraclube" type="radio" id="radioCriar"/>
-      <Form.Check inline label="Entrar" name="criarentraclube" type="radio" id="radioEntrar"  />
-      <Form.Control type="text" placeholder="Nome do Clube ou senha fornecida" />
-
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1 ">
+        <h3>Criar</h3>
+      <Form.Control type="text" placeholder="Nome do Clube" ref={nomeClube}/>
+      <br/>
+      <Form.Group className="mb-3" >
     <Form.Label>Descrição do Clube</Form.Label>
-    <Form.Control as="textarea" rows={3}/>
+    <Form.Control as="textarea" rows={4} ref={descricaoClube}/>
+    <Form.Control type="text" placeholder="Criar senha de Acesso" ref={criarSenha}/>
     </Form.Group>
-
+    <Button onClick={handleClubeCriar} >Criar</Button>
       </Form>
     </Row>
-
-    <Row>
-    <h2>Gerar Chave de Convite</h2>
-    </Row>
+    <br/>
     <Row>
       <Form>
-        <Row>
-          <Col>
-            <Button type="submit">Gerar Chave</Button>
-          </Col>
-          <Col>
-            <Form.Control plaintext readOnly defaultValue="Chave" />
-          </Col>
-        </Row>
+        <h3>Entrar</h3>
+      <Form.Control type="text" placeholder="Senha de Acesso" />
+      <br/>
+      <Button onClick={handleClubeEntrar}>Entrar</Button>
       </Form>
     </Row>
 </Container>

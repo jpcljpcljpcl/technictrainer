@@ -65,10 +65,10 @@ export const db = getFirestore(app);
 
 //////////////////////////
 //criar clube
-export async function criarClube(nomeClube,descricaoClube,uidTreinador){
+export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinador){
   try{
     await setDoc(doc(db, "ClubeTest/"+nomeClube), {
-      chaveClube:"",
+      chaveClube,
       descricaoClube,
       uidTreinador,
       uidAtletas: [],
@@ -162,7 +162,7 @@ export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvent
   try{
     await addDoc(collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento), {
       nome,
-      data: Timestamp.fromDate(new Date(data)),
+      data,
       descricao,
       assiduidade: []
     });
@@ -170,7 +170,7 @@ export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvent
       alert("Erro");
     }
 }
-/* criarEntrada("CNTN","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos"); */
+criarEntrada("TesteSigasiga","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos");
 ////////////////////////////////
 
 
