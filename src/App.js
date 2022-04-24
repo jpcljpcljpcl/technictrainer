@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-calendar/dist/Calendar.css';
 import Home from './components/PageComponents/Home'
@@ -8,7 +8,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import FormLogin from './FormLogin'
 import ProtectedRoutes from './components/PageComponents/ProtectedRoutes'
 import FormName from './FormName'
-import { useAuth, listarClubes } from './firebase';
+import { useAuth, verClubeAtual } from './firebase';
 import { Button } from 'react-bootstrap';
 import { userAtual, ClubeSelecionadoID } from './GlobalData';
 
@@ -17,6 +17,9 @@ export default function App() {
   const [clubeSelecionadoID,setClubeSelecionadoID]= useState(null);
   const currentUser=useAuth();
 
+
+
+  
   return (
     <div className="App">
     <div className="p-3 bg-dark text-white">

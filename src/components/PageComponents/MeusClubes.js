@@ -3,36 +3,48 @@ import { Container, Row, Col, CardGroup, Card, Button} from 'react-bootstrap';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
 import CriarClube from './CriarClube';
-import { listarClubesPertencentes } from '../../firebase';
-import { useAuth } from '../../firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { carregarClube, verClubeAtual} from '../../firebase';
+import { getDocs, collection, getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { where, query } from 'firebase/firestore';
-import { userAtual, ClubeSelecionadoID } from '../../GlobalData';
+import { userAtual} from '../../GlobalData';
+
 
 export default function MeusClubes() {
-  const [clubeAtualID,setClubeAtualID]=useContext(ClubeSelecionadoID);
   const userIdAtual = useContext(userAtual)
-
   const [clubes,setClubes]=useState([]);
-  
 
-  const atletasRef = collection(db, "ClubeTest");
-  const q = query(atletasRef, where("uidAtletas","array-contains",userIdAtual))
-const carregarClube = async (id) =>{
-  setClubeAtualID(id);
-}
+  const [clubeAtual, setClubeAtual] = useState();
 
 
 
   useEffect(() => {
-    const getClubesPertencentes = async () => {
+    const getClubeAtual = async () => {
+    const docSnap = await getDoc(doc(db, "UsersTest/"+userIdAtual));
+    setClubeAtual(docSnap.data().clubeAtual)
+  }
+  getClubeAtual();
+});
+
+
+  const handleCarregarClube = async (id) =>{
+  await carregarClube(id,userIdAtual);
+  window.location.reload();
+}
+
+
+ const q = query(collection(db, "ClubeTest"), where("uidAtletas","array-contains",userIdAtual));
+
+
+  useEffect(() => {
+      const getClubesPertencentes = async () => {
       const data = await getDocs(q);
       setClubes(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
     }
 
 
     getClubesPertencentes();
+    
   }, []);
 
 
@@ -57,7 +69,8 @@ const carregarClube = async (id) =>{
         </div>
         </Row>
         <Row>
-          <p>{userIdAtual} Clube Selecionado : {clubeAtualID} </p>
+          <p>
+            Clube Selecionado : {clubeAtual} </p>
         </Row>
         <Row>
             <CardGroup>
@@ -72,7 +85,7 @@ const carregarClube = async (id) =>{
                     </Card.Text>
                     <Row>
                       <Col>
-                        <Button onClick={() => {carregarClube(club.id)}}>Carregar Clube</Button>
+                        <Button onClick={() => {handleCarregarClube(club.id)}}>Carregar Clube</Button>
                       </Col>
                     </Row>
                 </Card.Body>

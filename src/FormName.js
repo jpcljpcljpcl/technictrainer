@@ -1,5 +1,5 @@
 import { React, useRef, useState } from 'react'
-import { useAuth, setUidProfile } from './firebase';
+import { useAuth, setUidProfile, adicionarUser } from './firebase';
 import {Form,Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ function setUidName(){
   setLoading(true);
   try{
     setUidProfile(uidnameRef.current.value);
+    adicionarUser(currentUser.uid,uidnameRef.current.value)
   } catch (error) {
     alert("Error!");
   }

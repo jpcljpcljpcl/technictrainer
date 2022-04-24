@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { useState, useEffect } from "react";
-import { getFirestore,arrayUnion, collection ,addDoc, doc, setDoc,updateDoc, getDocs, query, where, } from "firebase/firestore";
+import { getFirestore,arrayUnion, collection ,addDoc, doc, setDoc,updateDoc, getDocs, query, where, getDoc, } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -100,10 +100,79 @@ export async function juntarClube(nomeClube,uidAtual,nome){
 /* juntarClube("CNTN","currentUser.Teste","currentUser.displayName"); */
 ////////////////////////////////
 
+ ////////////////////////////////
+//adicionarUser
+export async function adicionarUser(userID,nomeUser){
+
+  try{
+    await setDoc(doc(db, "UsersTest/"+userID), {
+      nomeUser,
+      clubeAtual: "",
+    });
+    }catch{
+      alert("Erro");
+    }
+ }
+/*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
+/////////////////////////////////
 
 
 
+ ////////////////////////////////
+//adicionarUserClube
+export async function adicionarUserClube(clubeAtual,userID,nomeUser){
 
+  try{
+    await setDoc(doc(db, "UsersTest/"+userID), {
+      nomeUser,
+      clubeAtual,
+    });
+    await updateDoc(doc(db, "ClubeTest/",clubeAtual),{
+      uidAtletas: arrayUnion(userID),
+    }, { merge: true });
+    }catch{
+      alert("Erro");
+    }
+ }
+/*  adicionarUserClube("João Paulo","eventos","") */
+/////////////////////////////////
+
+
+
+/////////////////////////////////////
+/// ver clube atual
+export async function verClubeAtual(userID){
+  const docSnap = await getDoc(doc(db, "UsersTest/"+userID));
+
+if (docSnap.exists()) {
+  if((docSnap.data().clubeAtual) != null){
+    console.log(docSnap.data().clubeAtual)
+    return (docSnap.data().clubeAtual)
+  }else return null
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+ }
+/*  verClubeAtual("TaXMVDlbNKhh0TH7SuekZsNgdaB3") */
+ 
+ /////////////////////////////////////
+
+
+ ////////////////////////////////
+//adicionarUserClube
+export async function carregarClube(clubeAtual,userID){
+
+  try{
+    await updateDoc(doc(db, "UsersTest/"+userID), {
+      clubeAtual,
+    });
+    }catch{
+      alert("Erro");
+    }
+ }
+/*  carregarClube("Teste","TaXMVDlbNKhh0TH7SuekZsNgdaB3") */
+/////////////////////////////////
 
 
 
@@ -190,6 +259,7 @@ export async function gerirAssiduidade(nomeClube,tipoTreinoEvento,uidTreinoEvent
 
 
 
+
 ////////////////////////////////
 //ListarAgenda
 export async function listarAgenda(nomeClube,tipoTreinoEvento){
@@ -226,6 +296,10 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
  }
 /*  listarAgendaEqualTo("TesteSigasiga","eventos","2022/04/12") */
 /////////////////////////////////
+
+
+
+
 
 
 

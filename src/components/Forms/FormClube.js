@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import { Form , Container, Button, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { criarClube, juntarClube, useAuth } from '../../firebase';
-
+import { adicionarUserClube, criarClube, useAuth } from '../../firebase';
 
 export default function App() {
   const currentUser= useAuth();
@@ -12,12 +11,10 @@ export default function App() {
 
   const handleClubeCriar = () => {
     criarClube(nomeClube.current.value,criarSenha.current.value,descricaoClube.current.value,currentUser.uid)
-    console.log(nomeClube.current.value, criarSenha.current.value, descricaoClube.current.value,currentUser.uid)
   };
 
   const handleClubeEntrar = () => {
-    juntarClube(nomeClube.current.value,currentUser.uid,currentUser.displayName)
-    console.log(nomeClube.current.value,currentUser.uid,currentUser.displayName)
+    adicionarUserClube(nomeClube.current.value,currentUser.uid,currentUser.displayName)
   };
 
 
