@@ -11,12 +11,18 @@ import { where, query } from 'firebase/firestore';
 
 export default function MeusClubes() {
   const currentUser=useAuth();
+  const [clubeAtualID,setClubeAtualID]=useState();
 
   const [clubes,setClubes]=useState([]);
   
 
   const atletasRef = collection(db, "ClubeTest");
   const q = query(atletasRef, where("uidAtletas","array-contains","TaXMVDlbNKhh0TH7SuekZsNgdaB3"), )
+
+const carregarClube = async (id) =>{
+  setClubeAtualID(id);
+}
+
 
 
   useEffect(() => {
@@ -40,13 +46,18 @@ export default function MeusClubes() {
         <Row>
             <Timebar/>
         </Row>
-        <Row></Row>
+        <Row>
+
+        </Row>
 
         <Row>
         <CriarClube/>
         <div>
           <br/>
         </div>
+        </Row>
+        <Row>
+          <h1>Clube Selecionado : {clubeAtualID}</h1>
         </Row>
         <Row>
             <CardGroup>
@@ -61,7 +72,7 @@ export default function MeusClubes() {
                     </Card.Text>
                     <Row>
                       <Col>
-                        <Button>Carregar Clube</Button>
+                        <Button onClick={() => {carregarClube(club.id)}}>Carregar Clube</Button>
                       </Col>
                     </Row>
                 </Card.Body>
