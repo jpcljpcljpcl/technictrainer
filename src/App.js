@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-calendar/dist/Calendar.css';
 import Home from './components/PageComponents/Home'
@@ -10,8 +10,11 @@ import ProtectedRoutes from './components/PageComponents/ProtectedRoutes'
 import FormName from './FormName'
 import { useAuth, listarClubes } from './firebase';
 import { Button } from 'react-bootstrap';
+import { userAtual, ClubeSelecionadoID } from './GlobalData';
+
 
 export default function App() {
+  const [clubeSelecionadoID,setClubeSelecionadoID]= useState(null);
   const currentUser=useAuth();
 
   return (
@@ -20,6 +23,7 @@ export default function App() {
             <div>UID: {currentUser?.uid}</div>
             <div>Email: {currentUser?.email}</div>
             <div>Nome: {currentUser?.displayName}</div>
+            <div>Clube Selecionado: {clubeSelecionadoID}</div>
             <div><Button href="/setname">changename</Button></div>
 {/*
 <br />
@@ -29,9 +33,12 @@ export default function App() {
 
 <br/>
 <br/>
+<userAtual.Provider value={currentUser?.uid}>
+  <ClubeSelecionadoID.Provider value={[clubeSelecionadoID,setClubeSelecionadoID]}>
     <BrowserRouter>
       <div>
         <Routes>
+          
           <Route path="/login" element={<FormLogin />} />
           <Route path="/setname" element={<FormName />} />
           <Route element={<ProtectedRoutes />}>
@@ -39,10 +46,12 @@ export default function App() {
           <Route path="/calendar" element={<Calendario />} />
           <Route path="/clubs" element={<MeusClubes />} />
           </Route>
+        
         </Routes>
       </div>
     </BrowserRouter>
-
+  </ClubeSelecionadoID.Provider>
+</userAtual.Provider>
 {/*   */}
 </div>
 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, CardGroup, Card, Button} from 'react-bootstrap';
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
@@ -8,17 +8,17 @@ import { useAuth } from '../../firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { where, query } from 'firebase/firestore';
+import { userAtual, ClubeSelecionadoID } from '../../GlobalData';
 
 export default function MeusClubes() {
-  const currentUser=useAuth();
-  const [clubeAtualID,setClubeAtualID]=useState();
+  const [clubeAtualID,setClubeAtualID]=useContext(ClubeSelecionadoID);
+  const userIdAtual = useContext(userAtual)
 
   const [clubes,setClubes]=useState([]);
   
 
   const atletasRef = collection(db, "ClubeTest");
-  const q = query(atletasRef, where("uidAtletas","array-contains","TaXMVDlbNKhh0TH7SuekZsNgdaB3"), )
-
+  const q = query(atletasRef, where("uidAtletas","array-contains",userIdAtual))
 const carregarClube = async (id) =>{
   setClubeAtualID(id);
 }
@@ -57,7 +57,7 @@ const carregarClube = async (id) =>{
         </div>
         </Row>
         <Row>
-          <h1>Clube Selecionado : {clubeAtualID}</h1>
+          <p>{userIdAtual} Clube Selecionado : {clubeAtualID} </p>
         </Row>
         <Row>
             <CardGroup>
