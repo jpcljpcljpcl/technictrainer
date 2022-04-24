@@ -8,15 +8,25 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import FormLogin from './FormLogin'
 import ProtectedRoutes from './components/PageComponents/ProtectedRoutes'
 import FormName from './FormName'
-import { useAuth, verClubeAtual } from './firebase';
+import { db, useAuth } from './firebase';
 import { Button } from 'react-bootstrap';
 import { userAtual, ClubeSelecionadoID } from './GlobalData';
+import { doc, getDoc } from 'firebase/firestore';
+
 
 
 export default function App() {
-  const [clubeSelecionadoID,setClubeSelecionadoID]= useState(null);
+  const [clubeSelecionadoID,setClubeSelecionadoID]= useState();
   const currentUser=useAuth();
 
+
+  useEffect(() => {
+    const getClubeAtual = async () => {
+    const docSnap = await getDoc(doc(db, "UsersTest/"+currentUser.uid));
+    setClubeSelecionadoID(docSnap.data().clubeAtual)
+  }
+  getClubeAtual();
+});
 
 
   

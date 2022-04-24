@@ -7,24 +7,14 @@ import { carregarClube, verClubeAtual} from '../../firebase';
 import { getDocs, collection, getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { where, query } from 'firebase/firestore';
-import { userAtual} from '../../GlobalData';
+import { ClubeSelecionadoID, userAtual} from '../../GlobalData';
 
 
 export default function MeusClubes() {
   const userIdAtual = useContext(userAtual)
   const [clubes,setClubes]=useState([]);
+  const [clubeSelecionadoID,setClubeSelecionadoID]=useContext(ClubeSelecionadoID)
 
-  const [clubeAtual, setClubeAtual] = useState();
-
-
-
-  useEffect(() => {
-    const getClubeAtual = async () => {
-    const docSnap = await getDoc(doc(db, "UsersTest/"+userIdAtual));
-    setClubeAtual(docSnap.data().clubeAtual)
-  }
-  getClubeAtual();
-});
 
 
   const handleCarregarClube = async (id) =>{
@@ -70,7 +60,7 @@ export default function MeusClubes() {
         </Row>
         <Row>
           <p>
-            Clube Selecionado : {clubeAtual} </p>
+            Clube Selecionado : {clubeSelecionadoID} </p>
         </Row>
         <Row>
             <CardGroup>
