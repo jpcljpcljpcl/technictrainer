@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, useContext, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
@@ -8,10 +8,39 @@ import {useState} from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { db } from '../../firebase';
+import { collection, connectFirestoreEmulator, doc, getDocs, query, where } from 'firebase/firestore';
+import { ClubeSelecionadoID, userAtual} from '../../GlobalData';
+import { el } from 'date-fns/locale';
 
-export default function Calendario() {
+
+export default function Calendario({currentUser, clubeSelected}) {
     const today = new Date();
     const [selectedDay, setSelectedDay] = useState(today);
+    const [atividades,setAtividades]=useState();
+    const [clubeSelecionadoID,setClubeSelecionadoID]=useContext(ClubeSelecionadoID)
+    const [isBusy,setIsBusy]=useState(false);
+
+    const atividadesRef = collection(db, "ClubeTest/"+clubeSelected+"/"+"eventos");
+    const q = query(atividadesRef, where("data","==",selectedDay), )
+    
+    const querySnapshot = query(collection(db, "ClubeTest/"+clubeSelected+"/"+"eventos"));
+
+
+    useEffect(() =>{
+        setIsBusy(true);
+        const getAtividades = async() => {
+            const data = await getDocs(querySnapshot);
+            setAtividades(data.docs.map((doc)=> ({...doc.data(), id: doc.id})))
+            setIsBusy(false);
+        };
+          
+        
+        if (clubeSelected != null ){
+            getAtividades();
+        }
+    },[clubeSelected, selectedDay /* , tipoEventoTreino  */])
+
 
   return (
     <Container>
@@ -28,6 +57,11 @@ export default function Calendario() {
 <Row>
     <Col>
         <h1>Agenda Diaria</h1>
+        {atividades.map((atividade) => {
+            return(
+                <div>{atividade.id}</div>
+            )
+        })}
         <div>Agenda com lista de tarefas do dia</div>
         <div>Agenda com lista de tarefas do dia</div>
         <div>Agenda com lista de tarefas do dia</div>

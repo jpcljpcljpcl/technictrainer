@@ -13,8 +13,7 @@ import { ClubeSelecionadoID, userAtual} from '../../GlobalData';
 export default function MeusClubes() {
   const userIdAtual = useContext(userAtual)
   const [clubes,setClubes]=useState([]);
-  const [clubeSelecionadoID,setClubeSelecionadoID]=useContext(ClubeSelecionadoID)
-
+  const clubeSelecionadoID=useContext(ClubeSelecionadoID)
 
 
   const handleCarregarClube = async (id) =>{

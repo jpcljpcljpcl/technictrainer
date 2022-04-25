@@ -23,10 +23,10 @@ export default function App() {
     event.setSeconds(0);
     if (active === 0){
       
-    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
+    criarEntrada("CNTN",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
     }
     if (active === 1)
-    criarEntrada("TesteSigasiga",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
+    criarEntrada("CNTN",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
     if (active == null){
       alert("Selecione Tipologia")
     }

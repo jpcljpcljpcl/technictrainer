@@ -25,8 +25,10 @@ export default function App() {
     const docSnap = await getDoc(doc(db, "UsersTest/"+currentUser.uid));
     setClubeSelecionadoID(docSnap.data().clubeAtual)
   }
+  if (currentUser != null){
   getClubeAtual();
-});
+}
+},[currentUser,clubeSelecionadoID,setClubeSelecionadoID]) ;
 
 
   
@@ -56,7 +58,7 @@ export default function App() {
           <Route path="/setname" element={<FormName />} />
           <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendario />} />
+          <Route path="/calendar" element={<Calendario currentUser={currentUser} clubeSelected={clubeSelecionadoID}/>} />
           <Route path="/clubs" element={<MeusClubes />} />
           </Route>
         
