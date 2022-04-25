@@ -17,18 +17,26 @@ import { doc, getDoc } from 'firebase/firestore';
 
 export default function App() {
   const [clubeSelecionadoID,setClubeSelecionadoID]= useState();
-  const currentUser=useAuth();
+  const [atividadeSelecionada,setAtividadeSelecionada]= useState();
+  const [tipoAtividadeSelecionada,setTipoAtividadeSelecionada]= useState();
 
+  const currentUser=useAuth();
 
   useEffect(() => {
     const getClubeAtual = async () => {
     const docSnap = await getDoc(doc(db, "UsersTest/"+currentUser.uid));
     setClubeSelecionadoID(docSnap.data().clubeAtual)
+    setAtividadeSelecionada(docSnap.data().atividadeAtual)
+    setTipoAtividadeSelecionada(docSnap.data().tipoAtividade)
   }
   if (currentUser != null){
   getClubeAtual();
 }
-},[currentUser,clubeSelecionadoID,setClubeSelecionadoID]) ;
+},[currentUser]) ;
+
+
+
+
 
 
   
@@ -57,8 +65,8 @@ export default function App() {
           <Route path="/login" element={<FormLogin />} />
           <Route path="/setname" element={<FormName />} />
           <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendario currentUser={currentUser} clubeSelected={clubeSelecionadoID}/>} />
+          <Route path="/" element={<Home currentUser={currentUser} clubeSelected={clubeSelecionadoID} atividadeSelecionada={atividadeSelecionada} tipoAtividadeSelecionada={tipoAtividadeSelecionada}/>} />
+          <Route path="/calendar" element={<Calendario currentUser={currentUser} clubeSelected={clubeSelecionadoID} atividadeSelecionada={atividadeSelecionada}/>} />
           <Route path="/clubs" element={<MeusClubes />} />
           </Route>
         

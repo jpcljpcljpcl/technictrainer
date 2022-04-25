@@ -18,8 +18,6 @@ export default function Calendario({currentUser, clubeSelected}) {
     const today = new Date();
     const [selectedDay, setSelectedDay] = useState(today);
     const [atividades,setAtividades]=useState([]);
-    const [clubeSelecionadoID,setClubeSelecionadoID]=useContext(ClubeSelecionadoID)
-    const [isBusy,setIsBusy]=useState(false);
     const [treinoEvento,setTreinoEvento]=useState();
     const verEvento = useRef();
     const verTreino = useRef();
@@ -31,11 +29,9 @@ export default function Calendario({currentUser, clubeSelected}) {
 
 
     useEffect(() =>{
-        setIsBusy(true);
         const getAtividades = async() => {
             const data = await getDocs(q);
             setAtividades(data.docs.map((doc)=> ({...doc.data(), id: doc.id})))
-            setIsBusy(false);
         };
           
         
@@ -45,7 +41,7 @@ export default function Calendario({currentUser, clubeSelected}) {
     },[clubeSelected, selectedDay,  /* , tipoEventoTreino  */])
       
     const handleCarregarAtividade = async (id) =>{
-        await carregarAtividade(id,currentUser.uid);
+        await carregarAtividade(id,currentUser.uid,treinoEvento);
         window.location.reload();
       }
 
@@ -103,7 +99,7 @@ export default function Calendario({currentUser, clubeSelected}) {
                     </Card.Text>
                     <Row>
                       <Col>
-                        <Button onClick={() => {handleCarregarAtividade(atividade.id)}}>Carregar</Button>
+                        <Button onClick={() => {handleCarregarAtividade(atividade.id,treinoEvento)}}>Carregar</Button>
                       </Col>
                     </Row>
                 </Card.Body>

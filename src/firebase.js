@@ -300,11 +300,12 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
 
  ////////////////////////////////
 //carregarAtividade
-export async function carregarAtividade(atividadeAtual,userID){
+export async function carregarAtividade(atividadeAtual,userID,tipoAtividade){
 
   try{
     await updateDoc(doc(db, "UsersTest/"+userID), {
       atividadeAtual,
+      tipoAtividade,
     });
     }catch{
       alert("Erro");
