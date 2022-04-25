@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import FormCalendario from '../../components/Forms/FormCalendario'
 import { Row, Col } from 'react-bootstrap';
 
-export default function CriarEvento(){
+export default function CriarEvento({clubeSelected}){
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -29,7 +29,7 @@ export default function CriarEvento(){
             <Modal.Title>Criar Treino/Evento</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormCalendario/>
+            <FormCalendario clubeSelected={clubeSelected}/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

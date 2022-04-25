@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function App() {
+export default function FormCalendario({clubeSelected}) {
   const currentUser= useAuth();
   const criarTreino = useRef();
   const criarEvento = useRef();
@@ -23,10 +23,10 @@ export default function App() {
     event.setSeconds(0);
     if (active === 0){
       
-    criarEntrada("CNTN",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
+    criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
     }
     if (active === 1)
-    criarEntrada("CNTN",nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
+    criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
     if (active == null){
       alert("Selecione Tipologia")
     }
@@ -38,7 +38,7 @@ export default function App() {
    /*  criarEntrada("TesteSigasiga","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos"); */
 <Container>
     <Row>
-      <Badge pill bg="secondary">Clube FC (clube selecionado)</Badge>
+      <Badge pill bg="secondary">{clubeSelected}</Badge>
       <h3>Selecione data</h3>
       <DatePicker selected={startDate} 
           onChange={(date) => setStartDate(date)} 

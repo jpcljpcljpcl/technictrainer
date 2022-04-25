@@ -25,7 +25,7 @@ export default function CriarClube() {
             <Modal.Title>Criar/Entrar em Clube</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormClube/>
+            <FormClube />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

@@ -1,5 +1,5 @@
-import React, { Component, useContext, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import React, { Component, useContext, useEffect, useRef } from 'react'
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
 import 'react-day-picker/dist/style.css';
@@ -17,20 +17,23 @@ import { el } from 'date-fns/locale';
 export default function Calendario({currentUser, clubeSelected}) {
     const today = new Date();
     const [selectedDay, setSelectedDay] = useState(today);
-    const [atividades,setAtividades]=useState();
+    const [atividades,setAtividades]=useState([]);
     const [clubeSelecionadoID,setClubeSelecionadoID]=useContext(ClubeSelecionadoID)
     const [isBusy,setIsBusy]=useState(false);
+    const [treinoEvento,setTreinoEvento]=useState();
+    const verEvento = useRef();
+    const verTreino = useRef();
 
-    const atividadesRef = collection(db, "ClubeTest/"+clubeSelected+"/"+"eventos");
+    const atividadesRef = collection(db, "ClubeTest/"+clubeSelected+"/"+treinoEvento);
     const q = query(atividadesRef, where("data","==",selectedDay), )
     
-    const querySnapshot = query(collection(db, "ClubeTest/"+clubeSelected+"/"+"eventos"));
+    const querySnapshot = query(collection(db, "ClubeTest/"+clubeSelected+"/"+treinoEvento));
 
 
     useEffect(() =>{
         setIsBusy(true);
         const getAtividades = async() => {
-            const data = await getDocs(querySnapshot);
+            const data = await getDocs(q);
             setAtividades(data.docs.map((doc)=> ({...doc.data(), id: doc.id})))
             setIsBusy(false);
         };
@@ -39,7 +42,8 @@ export default function Calendario({currentUser, clubeSelected}) {
         if (clubeSelected != null ){
             getAtividades();
         }
-    },[clubeSelected, selectedDay /* , tipoEventoTreino  */])
+    },[clubeSelected, selectedDay,  /* , tipoEventoTreino  */])
+      
 
 
   return (
@@ -57,17 +61,40 @@ export default function Calendario({currentUser, clubeSelected}) {
 <Row>
     <Col>
         <h1>Agenda Diaria</h1>
-        {atividades.map((atividade) => {
+        <Form>
+        <Form.Check inline label="Treino" name="entrada" type="radio" ref={verTreino} onClick={() => setTreinoEvento("treinos")}/>
+        <Form.Check inline label="Evento" name="entrada" type="radio" ref={verEvento} onClick={() => setTreinoEvento("eventos")}/>
+       </Form>
+       {/*  <Button onClick={() => {handleCarregarAtividade()}}>Carregar</Button> */}
+
+{/*        
+ {atividades.map(atividade => {
+  return (
+<Card bg="light" style={{ width: '18rem', color: 'black'}}>
+                <Card.Body>
+                    <Card.Title>{atividade.nome}</Card.Title>
+                    <Card.Text>
+                    {atividade.descricao}                    
+                    </Card.Text>
+                    <Row>
+                      <Col>
+                        <Button>Carregar Clube</Button>
+                      </Col>
+                    </Row>
+                </Card.Body>
+                </Card>
+
+)})}
+ */}
+
+
+
+       
+ {atividades.map((atividade) => {
             return(
-                <div>{atividade.id}</div>
+                <div>{atividade.nome}</div>
             )
-        })}
-        <div>Agenda com lista de tarefas do dia</div>
-        <div>Agenda com lista de tarefas do dia</div>
-        <div>Agenda com lista de tarefas do dia</div>
-        <div>Agenda com lista de tarefas do dia</div>
-        <div>Agenda com lista de tarefas do dia</div>
-        <div>Agenda com lista de tarefas do dia</div>
+        })} 
     </Col>
     <Col>
         <Row>
@@ -76,14 +103,14 @@ export default function Calendario({currentUser, clubeSelected}) {
             toYear={2030} 
             captionLayout="dropdown"  */
             mode="single"
-            required
-            selected={selectedDay}
+    /*         required
+            selected={selectedDay} */
             onSelect={setSelectedDay}
             locale={pt}
             />
         </Row>
         <Row>
-            <CriarEvento/>
+            <CriarEvento clubeSelected={clubeSelected}/>
         </Row>
     </Col>
 </Row>
