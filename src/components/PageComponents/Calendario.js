@@ -8,7 +8,7 @@ import {useState} from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { db } from '../../firebase';
+import { carregarAtividade, db } from '../../firebase';
 import { collection, connectFirestoreEmulator, doc, getDocs, query, where } from 'firebase/firestore';
 import { ClubeSelecionadoID, userAtual} from '../../GlobalData';
 import { el } from 'date-fns/locale';
@@ -44,7 +44,10 @@ export default function Calendario({currentUser, clubeSelected}) {
         }
     },[clubeSelected, selectedDay,  /* , tipoEventoTreino  */])
       
-
+    const handleCarregarAtividade = async (id) =>{
+        await carregarAtividade(id,currentUser.uid);
+        window.location.reload();
+      }
 
   return (
     <Container>
@@ -92,8 +95,19 @@ export default function Calendario({currentUser, clubeSelected}) {
        
  {atividades.map((atividade) => {
             return(
-                <div>{atividade.nome}</div>
-            )
+<Card bg="light" style={{ width: '18rem', color: 'black'}}>
+                <Card.Body>
+                    <Card.Title>{atividade.nome}</Card.Title>
+                    <Card.Text>
+                    {atividade.descricao}                    
+                    </Card.Text>
+                    <Row>
+                      <Col>
+                        <Button onClick={() => {handleCarregarAtividade(atividade.id)}}>Carregar</Button>
+                      </Col>
+                    </Row>
+                </Card.Body>
+                </Card>            )
         })} 
     </Col>
     <Col>

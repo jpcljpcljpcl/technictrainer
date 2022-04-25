@@ -71,7 +71,7 @@ export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinado
       chaveClube,
       descricaoClube,
       uidTreinador,
-      uidAtletas: [],
+      uidAtletas: [uidTreinador],
     });
     }catch{
       alert("Erro na criacao de clube");
@@ -160,7 +160,7 @@ if (docSnap.exists()) {
 
 
  ////////////////////////////////
-//adicionarUserClube
+//carregarClube
 export async function carregarClube(clubeAtual,userID){
 
   try{
@@ -298,7 +298,20 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
 /////////////////////////////////
 
 
+ ////////////////////////////////
+//carregarAtividade
+export async function carregarAtividade(atividadeAtual,userID){
 
+  try{
+    await updateDoc(doc(db, "UsersTest/"+userID), {
+      atividadeAtual,
+    });
+    }catch{
+      alert("Erro");
+    }
+ }
+/*  carregarAtividade("Teste","TaXMVDlbNKhh0TH7SuekZsNgdaB3") */
+/////////////////////////////////
 
 
 
