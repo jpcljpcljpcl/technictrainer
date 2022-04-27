@@ -48,12 +48,12 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
           <Container>
     <Row>
       <Form>
-
+{/* 
       {idsClube.uidAtletas.map((idClube) => {
             return(
             <Form.Check type='checkbox' id={idClube} label={idClube}/>
             )
-          })} 
+          })}  */}
         
 
 
