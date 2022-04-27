@@ -1,14 +1,34 @@
-import React from 'react'
+import { collection, doc, getDoc, getDocs, query } from 'firebase/firestore';
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import FormAssiduidade from '../../components/Forms/FormAssiduidade'
+import { Button, Container, Form, Modal, Row } from 'react-bootstrap';
+import { db } from '../../firebase';
 
-export default function Assiduidade() {
+
+export default function Assiduidade({currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
     const [show, setShow] = useState(false);
+    const [idsClube,setIdsClube]=useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
+
+    useEffect(() =>{
+      const getIdsClube = async() => {
+          const docSnap = await getDoc(doc(db, "ClubeTest/", clubeSelected));
+/*           if (docSnap.exists()) { */
+            setIdsClube(docSnap.data())
+            console.log(docSnap.data());
+      };
+      if (clubeSelected != null && currentUser != null && 
+        atividadeSelecionada != null && tipoAtividadeSelecionada != null)  {
+          getIdsClube();
+    }
+  },[clubeSelected && currentUser && 
+    atividadeSelecionada && tipoAtividadeSelecionada])
+
+
+
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -25,7 +45,23 @@ export default function Assiduidade() {
             <Modal.Title>Assiduidade</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormAssiduidade/>
+          <Container>
+    <Row>
+      <Form>
+
+      {idsClube.uidAtletas.map((idClube) => {
+            return(
+            <Form.Check type='checkbox' id={idClube} label={idClube}/>
+            )
+          })} 
+        
+
+
+
+
+      </Form>
+    </Row>
+</Container>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

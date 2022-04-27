@@ -15,18 +15,12 @@ const [atividadeAtual,setAtividadeAtual]=useState()
   useEffect(() =>{
       const getAtividadeAtual = async() => {
           const docSnap = await getDoc(doc(db, "ClubeTest/"+clubeSelected+"/"+tipoAtividadeSelecionada+"/", atividadeSelecionada));
-          if (docSnap.exists()) {
+/*           if (docSnap.exists()) { */
             setAtividadeAtual(docSnap.data())
             console.log(docSnap.data());
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-          
       };
-      
-      if ((clubeSelected && currentUser && 
-        atividadeSelecionada && tipoAtividadeSelecionada) != null ){
+      if (clubeSelected != null && currentUser != null && 
+        atividadeSelecionada != null && tipoAtividadeSelecionada != null)  {
       getAtividadeAtual();
     }
   },[clubeSelected && currentUser && 
@@ -44,12 +38,13 @@ const [atividadeAtual,setAtividadeAtual]=useState()
           <h1>Bem vindo/a {currentUser?.displayName}</h1>
         </Row>
         <Row>
-        <Assiduidade />
+        <Assiduidade currentUser={currentUser} clubeSelected={clubeSelected} atividadeSelecionada={atividadeSelecionada} tipoAtividadeSelecionada={tipoAtividadeSelecionada}/>
         </Row>
         <Row>
-          <h3>Treino dia %%</h3>  
-{/*           <div>{atividadeAtual.nome}</div> */}
-        
+          <h3>{atividadeAtual?.nome}</h3>
+          <h5>{atividadeAtual?.data.toDate().toString()} </h5>
+          <div>{atividadeAtual?.descricao}</div>
+          <div></div>
 
         
       </Row>
