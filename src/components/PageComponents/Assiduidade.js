@@ -8,10 +8,36 @@ import { db } from '../../firebase';
 export default function Assiduidade({currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
     const [show, setShow] = useState(false);
     const [idsClube,setIdsClube]=useState();
+    const [nomes,setNomes]=useState([]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
+
+
+/*     function getNomes() {
+      {idsClube.uidAtletas.map((idClube) => {
+        return(
+        
+        )
+      })}  
+    } */
+/*   
+    const q = query(collection(db, "UsersTest"), where("id","array-contains",userIdAtual)); */
+
+
+    useEffect(() =>{
+      const getNomes = async() => {
+          const docSnap = await getDoc(doc(db, "ClubeTest/", clubeSelected));
+          if (docSnap.exists()) {
+            setNomes(docSnap.data())
+            }
+      };
+      if (idsClube != null)  {
+          getNomes();
+    }
+  },[clubeSelected && currentUser && 
+    atividadeSelecionada && tipoAtividadeSelecionada])
+
 
     useEffect(() =>{
       const getIdsClube = async() => {
@@ -26,6 +52,20 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
     }
   },[clubeSelected && currentUser && 
     atividadeSelecionada && tipoAtividadeSelecionada])
+
+
+/*  useEffect(() =>{
+  {idsClube.uidAtletas.map((idClube) => {
+    return(
+    <Form.Check type='checkbox' id={idClube} label={idClube}/>
+    )
+  })}  
+
+
+
+}) */
+
+    
 
 
 
