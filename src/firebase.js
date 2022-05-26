@@ -67,7 +67,7 @@ export const db = getFirestore(app);
 //criar clube
 export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinador){
   try{
-    await setDoc(doc(db, "ClubeTest/"+nomeClube), {
+    await setDoc(doc(db, "Clubes/"+nomeClube), {
       chaveClube,
       descricaoClube,
       uidTreinador,
@@ -87,10 +87,10 @@ export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinado
 //juntarClube
 export async function juntarClube(nomeClube,uidAtual,nome){
   try{
-    await setDoc(doc(db, "ClubeTest/"+nomeClube+"/atletas/", uidAtual), {
+    await setDoc(doc(db, "Clubes/"+nomeClube+"/atletas/", uidAtual), {
       nome,
     });
-    await updateDoc(doc(db, "ClubeTest/",nomeClube),{
+    await updateDoc(doc(db, "Clubes/",nomeClube),{
       uidAtletas: arrayUnion(uidAtual),
     }, { merge: true });
     }catch{
@@ -105,7 +105,7 @@ export async function juntarClube(nomeClube,uidAtual,nome){
 export async function adicionarUser(userID,nomeUser){
 
   try{
-    await setDoc(doc(db, "UsersTest/"+userID), {
+    await setDoc(doc(db, "Users/"+userID), {
       nomeUser,
       clubeAtual: "",
     });
@@ -123,11 +123,11 @@ export async function adicionarUser(userID,nomeUser){
 export async function adicionarUserClube(clubeAtual,userID,nomeUser){
 
   try{
-    await setDoc(doc(db, "UsersTest/"+userID), {
+    await setDoc(doc(db, "Users/"+userID), {
       nomeUser,
       clubeAtual,
     });
-    await updateDoc(doc(db, "ClubeTest/",clubeAtual),{
+    await updateDoc(doc(db, "Clubes/",clubeAtual),{
       uidAtletas: arrayUnion(userID),
     }, { merge: true });
     }catch{
@@ -142,7 +142,7 @@ export async function adicionarUserClube(clubeAtual,userID,nomeUser){
 /////////////////////////////////////
 /// ver clube atual
 export async function verClubeAtual(userID){
-  const docSnap = await getDoc(doc(db, "UsersTest/"+userID));
+  const docSnap = await getDoc(doc(db, "Users/"+userID));
 
 if (docSnap.exists()) {
   if((docSnap.data().clubeAtual) != null){
@@ -164,7 +164,7 @@ if (docSnap.exists()) {
 export async function carregarClube(clubeAtual,userID){
 
   try{
-    await updateDoc(doc(db, "UsersTest/"+userID), {
+    await updateDoc(doc(db, "Users/"+userID), {
       clubeAtual,
     });
     }catch{
@@ -179,7 +179,7 @@ export async function carregarClube(clubeAtual,userID){
 ////////////////////////////////
 //ListarClubes
 export async function listarClubes(){
- const querySnapshot = await getDocs(collection(db, "ClubeTest"));
+ const querySnapshot = await getDocs(collection(db, "Clubes"));
   try {
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
@@ -198,7 +198,7 @@ querySnapshot.forEach((doc) => {
 ////////////////////////////////
 //ListarClubesPertencentes
 export async function listarClubesPertencentes(uidAtual){
-  const atletasRef = collection(db, "ClubeTest");
+  const atletasRef = collection(db, "Clubes");
   const q = query(atletasRef, where("uidAtletas","array-contains",uidAtual), )
   const q2 = query(atletasRef, where("uidTreinador", "==" ,uidAtual), )
 
@@ -229,7 +229,7 @@ export async function listarClubesPertencentes(uidAtual){
 //CriarEntrada na agenda
 export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvento){
   try{
-    await addDoc(collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento), {
+    await addDoc(collection(db, "Clubes/"+nomeClube+"/"+tipoTreinoEvento), {
       nome,
       data,
       descricao,
@@ -247,7 +247,7 @@ export async function criarEntrada(nomeClube,nome,data,descricao,tipoTreinoEvent
 //Gerir Assiduidade
 export async function gerirAssiduidade(nomeClube,tipoTreinoEvento,uidTreinoEvento,arrayPresencas){
   try{
-      await updateDoc(doc(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento,uidTreinoEvento),{
+      await updateDoc(doc(db, "Clubes/"+nomeClube+"/"+tipoTreinoEvento,uidTreinoEvento),{
         assiduidade: arrayUnion.apply(this, arrayPresencas),
     });
     }catch{
@@ -263,7 +263,7 @@ export async function gerirAssiduidade(nomeClube,tipoTreinoEvento,uidTreinoEvent
 ////////////////////////////////
 //ListarAgenda
 export async function listarAgenda(nomeClube,tipoTreinoEvento){
-  const querySnapshot = await getDocs(collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento));
+  const querySnapshot = await getDocs(collection(db, "Clubes/"+nomeClube+"/"+tipoTreinoEvento));
    try {
  querySnapshot.forEach((doc) => {
    // doc.data() is never undefined for query doc snapshots
@@ -280,7 +280,7 @@ export async function listarAgenda(nomeClube,tipoTreinoEvento){
  ////////////////////////////////
 //listarAgendaEqualTo
 export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
-  const atletasRef = collection(db, "ClubeTest/"+nomeClube+"/"+tipoTreinoEvento);
+  const atletasRef = collection(db, "Clubes/"+nomeClube+"/"+tipoTreinoEvento);
   const q = query(atletasRef, where("data","==",new Date(data)), )
 
 
@@ -303,7 +303,7 @@ export async function listarAgendaEqualTo(nomeClube,tipoTreinoEvento,data){
 export async function carregarAtividade(atividadeAtual,userID,tipoAtividade){
 
   try{
-    await updateDoc(doc(db, "UsersTest/"+userID), {
+    await updateDoc(doc(db, "Users/"+userID), {
       atividadeAtual,
       tipoAtividade,
     });
@@ -320,7 +320,7 @@ export async function carregarAtividade(atividadeAtual,userID,tipoAtividade){
  ////////////////////////////////
 //teste
 export async function testeDoc(uidAtual){
- const atletasRef = collection(db, "ClubeTest");
+ const atletasRef = collection(db, "Clubes");
  const q = query(atletasRef, where("uidAtletas","array-contains",uidAtual), )
  
  try {

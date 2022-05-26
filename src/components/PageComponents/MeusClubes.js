@@ -22,7 +22,7 @@ export default function MeusClubes() {
 }
 
 
- const q = query(collection(db, "ClubeTest"), where("uidAtletas","array-contains",userIdAtual));
+ const q = query(collection(db, "Clubes"), where("uidAtletas","array-contains",userIdAtual));
 
 
   useEffect(() => {

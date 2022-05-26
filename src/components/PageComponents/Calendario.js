@@ -22,10 +22,10 @@ export default function Calendario({currentUser, clubeSelected}) {
     const verEvento = useRef();
     const verTreino = useRef();
 
-    const atividadesRef = collection(db, "ClubeTest/"+clubeSelected+"/"+treinoEvento);
+    const atividadesRef = collection(db, "Clubes/"+clubeSelected+"/"+treinoEvento);
     const q = query(atividadesRef, where("data","==",selectedDay), )
     
-    const querySnapshot = query(collection(db, "ClubeTest/"+clubeSelected+"/"+treinoEvento));
+    const querySnapshot = query(collection(db, "Clubes/"+clubeSelected+"/"+treinoEvento));
 
 
     useEffect(() =>{

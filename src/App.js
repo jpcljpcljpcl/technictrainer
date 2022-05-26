@@ -24,7 +24,7 @@ export default function App() {
 
   useEffect(() => {
     const getClubeAtual = async () => {
-    const docSnap = await getDoc(doc(db, "UsersTest/"+currentUser.uid));
+    const docSnap = await getDoc(doc(db, "Users/"+currentUser.uid));
     setClubeSelecionadoID(docSnap.data().clubeAtual)
     setAtividadeSelecionada(docSnap.data().atividadeAtual)
     setTipoAtividadeSelecionada(docSnap.data().tipoAtividade)

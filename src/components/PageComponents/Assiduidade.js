@@ -27,7 +27,7 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
 
     useEffect(() =>{
       const getNomes = async() => {
-          const docSnap = await getDoc(doc(db, "ClubeTest/", clubeSelected));
+          const docSnap = await getDoc(doc(db, "Clubes/", clubeSelected));
           if (docSnap.exists()) {
             setNomes(docSnap.data())
             }
@@ -41,7 +41,7 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
 
     useEffect(() =>{
       const getIdsClube = async() => {
-          const docSnap = await getDoc(doc(db, "ClubeTest/", clubeSelected));
+          const docSnap = await getDoc(doc(db, "Clubes/", clubeSelected));
 /*           if (docSnap.exists()) { */
             setIdsClube(docSnap.data())
             console.log(docSnap.data());

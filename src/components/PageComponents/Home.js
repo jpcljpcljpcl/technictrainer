@@ -14,7 +14,7 @@ const [atividadeAtual,setAtividadeAtual]=useState()
   
   useEffect(() =>{
       const getAtividadeAtual = async() => {
-          const docSnap = await getDoc(doc(db, "ClubeTest/"+clubeSelected+"/"+tipoAtividadeSelecionada+"/", atividadeSelecionada));
+          const docSnap = await getDoc(doc(db, "Clubes/"+clubeSelected+"/"+tipoAtividadeSelecionada+"/", atividadeSelecionada));
 /*           if (docSnap.exists()) { */
             setAtividadeAtual(docSnap.data())
             console.log(docSnap.data());
@@ -23,8 +23,7 @@ const [atividadeAtual,setAtividadeAtual]=useState()
         atividadeSelecionada != null && tipoAtividadeSelecionada != null)  {
       getAtividadeAtual();
     }
-  },[clubeSelected && currentUser && 
-    atividadeSelecionada && tipoAtividadeSelecionada])
+  },[clubeSelected && currentUser && atividadeSelecionada && tipoAtividadeSelecionada])
 
   return (
     <Container>
