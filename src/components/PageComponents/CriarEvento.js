@@ -31,12 +31,6 @@ export default function CriarEvento({clubeSelected}){
           <Modal.Body>
             <FormCalendario clubeSelected={clubeSelected}/>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Fechar
-            </Button>
-            <Button>Guardar</Button>
-          </Modal.Footer>
         </Modal>
       </>
     );

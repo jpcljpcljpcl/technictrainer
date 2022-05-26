@@ -16,20 +16,23 @@ export default function FormCalendario({clubeSelected}) {
   const [startDate, setStartDate] = useState(new Date());
   const [active, setActive] = useState();
 
-  const handleCriarEntrada = () => {
+  const handleCriarEntrada = async () => {
     const event = new Date(startDate);
     event.setHours(0);
     event.setMinutes(0);
     event.setSeconds(0);
     if (active === 0){
-      
-    criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
+    await criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"treinos")
+    window.location.reload();
     }
-    if (active === 1)
-    criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
+    if (active === 1){
+    await criarEntrada(clubeSelected,nomeTreinoEvento.current.value,event,descricaoTreinoEvento.current.value,"eventos")
+    window.location.reload();
+    }
     if (active == null){
       alert("Selecione Tipologia")
     }
+    
   };
 
 
