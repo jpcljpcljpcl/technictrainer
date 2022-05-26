@@ -9,6 +9,8 @@ export default function CriarClube() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
+
+
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
@@ -27,12 +29,6 @@ export default function CriarClube() {
           <Modal.Body>
             <FormClube />
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Fechar
-            </Button>
-            <Button>Guardar</Button>
-          </Modal.Footer>
         </Modal>
       </>
     );

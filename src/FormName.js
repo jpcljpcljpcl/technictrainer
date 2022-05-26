@@ -31,7 +31,7 @@ function setUidName(){
   />
   <br />
     <Button onClick={setUidName} disabled={loading || !currentUser}>
-    Alterar Nome
+    Guardar
   </Button>
   <Link to="/">Home</Link>
 </Form>

@@ -9,12 +9,14 @@ export default function App() {
   const descricaoClube = useRef();
   const criarSenha = useRef();
 
-  const handleClubeCriar = () => {
-    criarClube(nomeClube.current.value,criarSenha.current.value,descricaoClube.current.value,currentUser.uid)
+  const handleClubeCriar = async () => {
+    await criarClube(nomeClube.current.value,criarSenha.current.value,descricaoClube.current.value,currentUser.uid)
+    window.location.reload();
   };
 
-  const handleClubeEntrar = () => {
-    adicionarUserClube(nomeClube.current.value,currentUser.uid,currentUser.displayName)
+  const handleClubeEntrar = async () => {
+    await adicionarUserClube(nomeClube.current.value,currentUser.uid,currentUser.displayName)
+    window.location.reload();
   };
 
 
