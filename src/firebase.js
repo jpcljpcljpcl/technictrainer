@@ -100,6 +100,8 @@ export async function juntarClube(nomeClube,uidAtual,nome){
 /* juntarClube("CNTN","currentUser.Teste","currentUser.displayName"); */
 ////////////////////////////////
 
+
+
  ////////////////////////////////
 //adicionarUser
 export async function adicionarUser(userID,nomeUser){
@@ -116,7 +118,35 @@ export async function adicionarUser(userID,nomeUser){
 /*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
 /////////////////////////////////
 
+ ////////////////////////////////
+//confirmarSenha
+export async function confirmarSenha(clube,senha){
 
+  const docSnap = await getDoc(doc(db, "Clubes/"+clube));
+
+if (docSnap.exists()) {
+  if((docSnap.data().chaveClube) === senha){
+    return (true)
+  }else return false
+}
+ }
+/*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
+/////////////////////////////////
+
+ ////////////////////////////////
+//verificarTreinador
+export async function verificarTreinador(clube,userID){
+
+  const docSnap = await getDoc(doc(db, "Clubes/"+clube));
+
+if (docSnap.exists()) {
+  if((docSnap.data().uidTreinador) === userID){
+    return (true)
+  }else return false
+}
+ }
+/*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
+/////////////////////////////////
 
  ////////////////////////////////
 //adicionarUserClube
