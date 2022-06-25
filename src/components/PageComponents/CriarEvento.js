@@ -12,7 +12,7 @@ export default function CriarEvento({clubeSelected, currentUser}){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
-    const handleClubeEntrar = async () => {
+    const handlePermissao = async () => {
       if (await verificarTreinador(clubeSelected,currentUser.uid)){
         setDesativo(false);
       }else {
@@ -21,7 +21,7 @@ export default function CriarEvento({clubeSelected, currentUser}){
       
     };
 
-    handleClubeEntrar();
+    handlePermissao();
 
     return (
       <>
