@@ -2,16 +2,28 @@ import { collection, doc, getDoc, getDocs, query } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Button, Container, Form, Modal, Row } from 'react-bootstrap';
-import { db } from '../../firebase';
+import { db, verificarTreinador } from '../../firebase';
 
 
 export default function Assiduidade({currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
     const [show, setShow] = useState(false);
     const [idsClube,setIdsClube]=useState();
     const [nomes,setNomes]=useState([]);
+    const [desativo, setDesativo] = useState(true);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handlePermissao = async () => {
+      if (await verificarTreinador(clubeSelected,currentUser.uid)){
+        setDesativo(false);
+      }else {
+        setDesativo(true);
+      }
+      
+    };
+
+    handlePermissao();
 
 
 /*     function getNomes() {
@@ -71,7 +83,7 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
 
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} disabled={desativo}>
           Assiduidade
         </Button>
   
