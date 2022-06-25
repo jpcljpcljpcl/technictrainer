@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Form , Container, Button, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { adicionarUserClube, confirmarSenha, criarClube, useAuth } from '../../firebase';
+import { adicionarUserClube, confirmarSenha, criarClube, useAuth, verificarClube } from '../../firebase';
 
 export default function App() {
   const currentUser= useAuth();
@@ -12,8 +12,11 @@ export default function App() {
   const nomeEntrarClube = useRef();
 
   const handleClubeCriar = async () => {
+    if(await verificarClube(nomeClube.current.value)){
+      alert("Nome de clube já existente.");
+    } else{
     await criarClube(nomeClube.current.value,criarSenha.current.value,descricaoClube.current.value,currentUser.uid)
-    window.location.reload();
+    window.location.reload();}
   };
 
   const handleClubeEntrar = async () => {

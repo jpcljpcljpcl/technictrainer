@@ -1,5 +1,5 @@
 import { React, useRef, useState } from 'react'
-import { signup, useAuth, logout, signin } from './firebase';
+import { signup, useAuth, logout, signin, criarClube} from './firebase';
 import {Form,Button} from 'react-bootstrap';
 
 export default function FormLogin() {
@@ -17,6 +17,7 @@ async function handleSignup (){
   } catch {
     alert("Email ja resgistado");
   }
+  await criarClube("Default","","","");
   setLoading(false);
 }
 

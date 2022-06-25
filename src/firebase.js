@@ -80,7 +80,20 @@ export async function criarClube(nomeClube,chaveClube,descricaoClube,uidTreinado
 /*  criarClube("CNTN","pwclube","random descricao","12321312uidtreinador"); */
 ////////////////////////////////
 
+ ////////////////////////////////
+//verificarClube
+export async function verificarClube(clube){
 
+  const docSnap = await getDoc(doc(db, "Clubes/"+clube));
+
+if (docSnap.exists()) {
+    return (true);
+  }
+  return false;
+}
+ 
+/*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
+/////////////////////////////////
 
 
 ////////////////////////////
