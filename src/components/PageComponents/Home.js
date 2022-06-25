@@ -47,7 +47,7 @@ const handleMarcar = async () => {
         <Row>
           <center>
           <h3>{atividadeAtual?.nome}</h3>
-          <h5>{atividadeAtual?.data.toDate().getDate()}/{atividadeAtual?.data.toDate().getMonth()}/{atividadeAtual?.data.toDate().getFullYear()} </h5>
+          <h5>{atividadeAtual?.data.toDate().getDate()}/{atividadeAtual?.data.toDate().getMonth()+1}/{atividadeAtual?.data.toDate().getFullYear()} </h5>
           <div>{atividadeAtual?.descricao}</div>
           <div></div>
 </center>

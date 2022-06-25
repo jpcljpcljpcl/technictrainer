@@ -1,7 +1,7 @@
-import { collection, doc, getDoc, getDocs, query } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Button, Container, Form, Modal, Row } from 'react-bootstrap';
+import { Button, Container, Modal, Row } from 'react-bootstrap';
 import { db, verificarTreinador } from '../../firebase';
 
 

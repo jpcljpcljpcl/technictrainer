@@ -6,7 +6,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function FormCalendario({clubeSelected}) {
-  const currentUser= useAuth();
   const criarTreino = useRef();
   const criarEvento = useRef();
   const nomeTreinoEvento = useRef();
@@ -38,7 +37,7 @@ export default function FormCalendario({clubeSelected}) {
 
 
   return (
-   /*  criarEntrada("TesteSigasiga","Treino xpto teste","December 25, 1815","20x 100 1'45 vo2 max testestes","treinos"); */
+   
 <Container>
     <Row>
       <Badge pill bg="secondary">{clubeSelected}</Badge>

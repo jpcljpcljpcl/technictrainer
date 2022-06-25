@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect, useRef } from 'react'
+import React, {useEffect, useRef } from 'react'
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
@@ -9,9 +9,8 @@ import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { carregarAtividade, db } from '../../firebase';
-import { collection, connectFirestoreEmulator, doc, getDocs, query, where } from 'firebase/firestore';
-import { ClubeSelecionadoID, userAtual} from '../../GlobalData';
-import { el } from 'date-fns/locale';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+
 
 
 export default function Calendario({currentUser, clubeSelected}) {
@@ -25,7 +24,6 @@ export default function Calendario({currentUser, clubeSelected}) {
     const atividadesRef = collection(db, "Clubes/"+clubeSelected+"/"+treinoEvento);
     const q = query(atividadesRef, where("data","==",selectedDay), )
     
-    const querySnapshot = query(collection(db, "Clubes/"+clubeSelected+"/"+treinoEvento));
 
 
     useEffect(() =>{
@@ -121,7 +119,7 @@ export default function Calendario({currentUser, clubeSelected}) {
         </Row>
         <Row>
             <CriarEvento clubeSelected={clubeSelected} currentUser={currentUser} />
-            <p>{clubeSelected}{currentUser.uid}</p>
+            
         </Row>
     </Col>
 </Row>

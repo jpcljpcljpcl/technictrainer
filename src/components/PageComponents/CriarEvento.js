@@ -43,7 +43,6 @@ export default function CriarEvento({clubeSelected, currentUser}){
           </Modal.Header>
           <Modal.Body>
             <FormCalendario clubeSelected={clubeSelected}/>
-            <p>{clubeSelected}{currentUser.uid}</p>
           </Modal.Body>
         </Modal>
       </>
