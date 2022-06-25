@@ -126,8 +126,8 @@ export async function confirmarSenha(clube,senha){
 
 if (docSnap.exists()) {
   if((docSnap.data().chaveClube) === senha){
-    return (true)
-  }else return false
+    return (true);
+  }else return false;
 }
  }
 /*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
@@ -141,12 +141,13 @@ export async function verificarTreinador(clube,userID){
 
 if (docSnap.exists()) {
   if((docSnap.data().uidTreinador) === userID){
-    return (true)
-  }else return false
-}
+    return (true);
+  } 
+  return false;
+  }
  }
-/*  adicionarUser("TaXMVDlbNKhh0TH7SuekZsNgdaB3","Joao Paulo Claudio Lopes") */
 /////////////////////////////////
+
 
  ////////////////////////////////
 //adicionarUserClube

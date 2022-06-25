@@ -120,7 +120,8 @@ export default function Calendario({currentUser, clubeSelected}) {
             />
         </Row>
         <Row>
-            <CriarEvento clubeSelected={clubeSelected}/>
+            <CriarEvento clubeSelected={clubeSelected} currentUser={currentUser} />
+            <p>{clubeSelected}{currentUser.uid}</p>
         </Row>
     </Col>
 </Row>

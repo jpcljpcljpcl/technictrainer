@@ -3,18 +3,31 @@ import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import FormCalendario from '../../components/Forms/FormCalendario'
 import { Row, Col } from 'react-bootstrap';
+import { verificarTreinador } from '../../firebase';
 
-export default function CriarEvento({clubeSelected}){
+export default function CriarEvento({clubeSelected, currentUser}){
     const [show, setShow] = useState(false);
+    const [desativo, setDesativo] = useState(true);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
+    const handleClubeEntrar = async () => {
+      if (await verificarTreinador(clubeSelected,currentUser.uid)){
+        setDesativo(false);
+      }else {
+        setDesativo(true);
+      }
+      
+    };
+
+    handleClubeEntrar();
+
     return (
       <>
       <Row>
         <Col md>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} disabled={desativo}>
           Criar Evento
         </Button>
         </Col>
@@ -30,6 +43,7 @@ export default function CriarEvento({clubeSelected}){
           </Modal.Header>
           <Modal.Body>
             <FormCalendario clubeSelected={clubeSelected}/>
+            <p>{clubeSelected}{currentUser.uid}</p>
           </Modal.Body>
         </Modal>
       </>
