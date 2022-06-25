@@ -5,11 +5,11 @@ import { Button, Container, Form, Modal, Row } from 'react-bootstrap';
 import { db, verificarTreinador } from '../../firebase';
 
 
-export default function Assiduidade({currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
+export default function Assiduidade({atividadeAtual, currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
     const [show, setShow] = useState(false);
-    const [idsClube,setIdsClube]=useState();
-    const [nomes,setNomes]=useState([]);
+    const [idsClube,setIdsClube]=useState([]);
     const [desativo, setDesativo] = useState(true);
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,40 +20,13 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
       }else {
         setDesativo(true);
       }
-      
     };
-
     handlePermissao();
-
-
-/*     function getNomes() {
-      {idsClube.uidAtletas.map((idClube) => {
-        return(
-        
-        )
-      })}  
-    } */
-/*   
-    const q = query(collection(db, "UsersTest"), where("id","array-contains",userIdAtual)); */
-
-
-    useEffect(() =>{
-      const getNomes = async() => {
-          const docSnap = await getDoc(doc(db, "Clubes/", clubeSelected));
-          if (docSnap.exists()) {
-            setNomes(docSnap.data())
-            }
-      };
-      if (idsClube != null)  {
-          getNomes();
-    }
-  },[clubeSelected && currentUser && 
-    atividadeSelecionada && tipoAtividadeSelecionada])
 
 
     useEffect(() =>{
       const getIdsClube = async() => {
-          const docSnap = await getDoc(doc(db, "Clubes/", clubeSelected));
+          const docSnap = await getDoc(doc(db, "Clubes/"+clubeSelected+"/"+tipoAtividadeSelecionada+"/", atividadeSelecionada));
 /*           if (docSnap.exists()) { */
             setIdsClube(docSnap.data())
             console.log(docSnap.data());
@@ -66,20 +39,9 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
     atividadeSelecionada && tipoAtividadeSelecionada])
 
 
-/*  useEffect(() =>{
-  {idsClube.uidAtletas.map((idClube) => {
-    return(
-    <Form.Check type='checkbox' id={idClube} label={idClube}/>
-    )
-  })}  
 
 
-
-}) */
-
-    
-
-
+  
 
     return (
       <>
@@ -99,19 +61,15 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
           <Modal.Body>
           <Container>
     <Row>
-      <Form>
 
-{/*       {idsClube.uidAtletas.map((idClube) => {
+      {idsClube?.assiduidade?.map((idClube) => {
             return(
-            <Form.Check type='checkbox' id={idClube} label={idClube}/>
+            <p>{idClube} </p>
             )
-          })}  */}
-        
+          })} 
 
 
 
-
-      </Form>
     </Row>
 </Container>
           </Modal.Body>
@@ -119,7 +77,6 @@ export default function Assiduidade({currentUser, clubeSelected,atividadeSelecio
             <Button variant="secondary" onClick={handleClose}>
               Fechar
             </Button>
-            <Button>Guardar</Button>
           </Modal.Footer>
         </Modal>
       </>

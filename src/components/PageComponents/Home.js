@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Button, Container, Row } from 'react-bootstrap'
 import Navbar from '../Navbar/Navbar';
 import Timebar from '../Navbar/Timebar';
-import { db, useAuth } from '../../firebase';
+import { db, marcarPresenca, useAuth } from '../../firebase';
 import Assiduidade from './Assiduidade';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -10,14 +10,18 @@ import { doc, getDoc } from 'firebase/firestore';
 export default function Home({currentUser, clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada}) {
 const [atividadeAtual,setAtividadeAtual]=useState()
 
-  
+const handleMarcar = async () => {
+  await marcarPresenca(clubeSelected,atividadeSelecionada,tipoAtividadeSelecionada,currentUser.displayName)
+  alert("Presença Confirmada");
+}
+
   
   useEffect(() =>{
       const getAtividadeAtual = async() => {
           const docSnap = await getDoc(doc(db, "Clubes/"+clubeSelected+"/"+tipoAtividadeSelecionada+"/", atividadeSelecionada));
 /*           if (docSnap.exists()) { */
             setAtividadeAtual(docSnap.data())
-            console.log(docSnap.data());
+            /* console.log(docSnap.data()); */
       };
       if (clubeSelected != null && currentUser != null && 
         atividadeSelecionada != null && tipoAtividadeSelecionada != null)  {
@@ -37,7 +41,8 @@ const [atividadeAtual,setAtividadeAtual]=useState()
           <h1>Bem vindo/a {currentUser?.displayName}</h1>
         </Row>
         <Row>
-        <Assiduidade currentUser={currentUser} clubeSelected={clubeSelected} atividadeSelecionada={atividadeSelecionada} tipoAtividadeSelecionada={tipoAtividadeSelecionada}/>
+        <Assiduidade atividadeAtual={atividadeAtual} currentUser={currentUser} clubeSelected={clubeSelected} atividadeSelecionada={atividadeSelecionada} tipoAtividadeSelecionada={tipoAtividadeSelecionada}/>
+        <Button onClick={handleMarcar}>Confirmar Presença na Atividade Atual</Button>
         </Row>
         <Row>
           <center>

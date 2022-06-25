@@ -113,7 +113,20 @@ export async function juntarClube(nomeClube,uidAtual,nome){
 /* juntarClube("CNTN","currentUser.Teste","currentUser.displayName"); */
 ////////////////////////////////
 
+////////////////////////////
+//marcarPresença
+export async function marcarPresenca(nomeClube,atividadeid,atividadetipo,nomeuser){
 
+  try{
+    await updateDoc(doc(db, "Clubes/"+nomeClube+"/"+atividadetipo,atividadeid),{
+      assiduidade: arrayUnion(nomeuser),
+    }, { merge: true });
+    }catch{
+      alert("Erro na marcacao.");
+    }
+}
+/* marcarPresenca("CNTN","44rZZr5mInnPuCkzssGF","treinos","João Lopes"); */
+////////////////////////////////
 
  ////////////////////////////////
 //adicionarUser
@@ -358,7 +371,21 @@ export async function carregarAtividade(atividadeAtual,userID,tipoAtividade){
 /*  carregarAtividade("Teste","TaXMVDlbNKhh0TH7SuekZsNgdaB3") */
 /////////////////////////////////
 
+////////////////////////////////
+//ListarClubes
+export async function presencas(nomeClube,atividadeid,atividadetipo){
+  const docRef = doc(db, "Clubes/"+nomeClube+"/"+atividadetipo,atividadeid);
+const docSnap = await getDoc(docRef);
 
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+} else {
+
+  console.log("No such document!");
+}
+ }
+/*  presencas("CNTN","K9wgDoJYAzaFzv71NuEU","treinos"); */
+ ////////////////////////////////
 
 
  ////////////////////////////////
