@@ -25,7 +25,7 @@ async function handleSignin (){
   try{
     await signin(emailRef.current.value, passwordRef.current.value);
   } catch {
-    alert("Conta inexistente");
+    alert("Dados Incorretos");
   }
   setLoading(false);
 }
