@@ -38,7 +38,7 @@ export default function FormCalendario({clubeSelected}) {
 
   return (
    
-<Container>
+<Container><center>
     <Row>
       <Badge pill bg="secondary">{clubeSelected}</Badge>
       <h3>Selecione data</h3>
@@ -53,11 +53,12 @@ export default function FormCalendario({clubeSelected}) {
         <Form.Check inline label="Evento" name="entrada" type="radio" ref={criarEvento} onClick={() => setActive(1)}/>
         <Form.Control type="text" placeholder="Titulo Treino/Evento" ref={nomeTreinoEvento}/>
         <Form.Group className="mb-3">
-        <Form.Control as="textarea" rows={4} ref={descricaoTreinoEvento}/>
+        <Form.Control as="textarea" rows={4} placeholder="Descrição" ref={descricaoTreinoEvento}/>
         </Form.Group>
         <Button onClick={handleCriarEntrada}>Criar</Button>
+        
       </Form>
-    </Row>
+    </Row></center>
 </Container>
   );
 }

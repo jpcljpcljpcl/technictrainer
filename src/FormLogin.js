@@ -55,14 +55,14 @@ async function handleLogout(){
     <Form.Control ref={passwordRef} type="password" placeholder="Password" />
   </Form.Group>
   <Button onClick={handleSignin} variant="primary" disabled={loading || currentUser}>
-    Sign In
+    Login
   </Button>
   <Button onClick={handleSignup} variant="primary" disabled={loading || currentUser}>
-    Sign Up
+    Registar
   </Button>
-  <Button onClick={handleLogout} variant="primary" disabled={loading || !currentUser}>
+{/*   <Button onClick={handleLogout} variant="primary" disabled={loading || !currentUser}>
     Log Out
-  </Button>
+  </Button> */}
 </Form>
 
 

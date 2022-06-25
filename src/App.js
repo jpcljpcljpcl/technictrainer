@@ -43,19 +43,14 @@ export default function App() {
   return (
     <div className="App">
     <div className="p-3 bg-dark text-white">
-            <div>UID: {currentUser?.uid}</div>
+{/*             <div>UID: {currentUser?.uid}</div>
             <div>Email: {currentUser?.email}</div>
             <div>Nome: {currentUser?.displayName}</div>
             <div>Clube Selecionado: {clubeSelecionadoID}</div>
-            <div><Button href="/setname">changename</Button></div>
-{/*
-<br />
-<br />
-<br />
-       <FormLogin/> */}
-
+            <div><Button href="/setname">changename</Button></div> 
 <br/>
 <br/>
+*/}
 <userAtual.Provider value={currentUser?.uid}>
   <ClubeSelecionadoID.Provider value={[clubeSelecionadoID,setClubeSelecionadoID]}>
     <BrowserRouter>

@@ -15,15 +15,15 @@ export default function Navbar() {
 
   return (
     <div>
-        <Nav activeKey="" fill variant="tabs" defaultActiveKey="">
+        <Nav fill variant="tabs" defaultActiveKey="">
     <Nav.Item>
-      <Nav.Link href="/">Home</Nav.Link>
+      <Nav.Link href="/">Treino</Nav.Link>
     </Nav.Item>
     <Nav.Item>
-    <Nav.Link href="/calendar">Calendar</Nav.Link>
+    <Nav.Link href="/calendar">Calendario</Nav.Link>
     </Nav.Item>
     <Nav.Item>
-      <Nav.Link href="/clubs">Club</Nav.Link>
+      <Nav.Link href="/clubs">Clubes</Nav.Link>
     </Nav.Item>
     <Nav.Item>
       <Nav.Link onClick={handleLogout} eventKey="Log Out">
