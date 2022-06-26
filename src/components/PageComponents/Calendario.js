@@ -92,9 +92,9 @@ export default function Calendario({currentUser, clubeSelected}) {
 <Card bg="light" style={{ width: '18rem', color: 'black'}}>
                 <Card.Body>
                     <Card.Title>{atividade.nome}</Card.Title>
-                    <Card.Text>
+{/*                     <Card.Text>
                     {atividade.descricao}                    
-                    </Card.Text>
+                    </Card.Text> */}
                     <Row>
                       <Col>
                         <Button onClick={() => {handleCarregarAtividade(atividade.id,treinoEvento)}}>Carregar</Button>
