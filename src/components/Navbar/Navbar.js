@@ -17,7 +17,7 @@ export default function Navbar() {
     <div>
         <Nav fill variant="tabs" defaultActiveKey="">
     <Nav.Item>
-      <Nav.Link href="/">Treino</Nav.Link>
+      <Nav.Link href="/">Atividade</Nav.Link>
     </Nav.Item>
     <Nav.Item>
     <Nav.Link href="/calendar">Calendario</Nav.Link>
